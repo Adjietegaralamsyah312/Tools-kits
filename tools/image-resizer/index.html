@@ -6,7 +6,7 @@
 <meta name="description" content="Resize images online free by width/height with aspect-ratio lock and presets. Preview and download. No upload.">
 <link rel="canonical" href="https://adjietegaralamsyah312.github.io/Tools-kits/tools/image-resizer/">
 <meta property="og:type" content="website"><meta property="og:title" content="Image Resizer | Tools Kits"><meta property="og:url" content="https://adjietegaralamsyah312.github.io/Tools-kits/tools/image-resizer/">
-<meta property="og:description" content="Resize images by width and height with aspect-ratio lock."><meta property="og:image" content="https://adjietegaralamsyah312.github.io/Tools-kits/assets/og-image.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Image Resizer | Tools Kits"><meta name="twitter:description" content="Resize images by width and height with aspect-ratio lock."><meta name="twitter:image" content="https://adjietegaralamsyah312.github.io/Tools-kits/assets/og-image.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="stylesheet" href="../../assets/css/style.css"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Image Resizer","url":"https://adjietegaralamsyah312.github.io/Tools-kits/tools/image-resizer/","applicationCategory":"MultimediaApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0"},"description":"Resize images online free by width/height with aspect-ratio lock and presets. Preview and download. No upload."}</script>
+<meta property="og:description" content="Resize images by width and height with aspect-ratio lock."><meta property="og:image" content="https://adjietegaralamsyah312.github.io/Tools-kits/assets/og-image.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Image Resizer | Tools Kits"><meta name="twitter:description" content="Resize images by width and height with aspect-ratio lock."><meta name="twitter:image" content="https://adjietegaralamsyah312.github.io/Tools-kits/assets/og-image.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="apple-touch-icon" href="../../favicon.svg"><link rel="manifest" href="../../manifest.webmanifest"><meta name="theme-color" content="#2563eb"><meta property="og:site_name" content="Tools Kits"><meta property="og:locale" content="en_US"><link rel="stylesheet" href="../../assets/css/style.css"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://adjietegaralamsyah312.github.io/Tools-kits/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://adjietegaralamsyah312.github.io/Tools-kits/tools/"},{"@type":"ListItem","position":3,"name":"Image Resizer","item":"https://adjietegaralamsyah312.github.io/Tools-kits/tools/image-resizer/"}]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Image Resizer","url":"https://adjietegaralamsyah312.github.io/Tools-kits/tools/image-resizer/","applicationCategory":"MultimediaApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0"},"description":"Resize images online free by width/height with aspect-ratio lock and presets. Preview and download. No upload."}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -40,35 +40,5 @@
 </main>
 <footer class="site"><div class="foot-bottom">© <span data-year>2026</span> Tools Kits</div></footer>
 <script src="../../assets/js/tools-data.js" defer></script><script src="../../assets/js/main.js" defer></script>
-<script>
-document.addEventListener("DOMContentLoaded",function(){
-  var drop=document.getElementById("drop"),file=document.getElementById("file"),W=document.getElementById("w"),H=document.getElementById("h"),
-  lock=document.getElementById("lock"),preset=document.getElementById("preset"),go=document.getElementById("bGo"),dl=document.getElementById("bDl"),
-  msg=document.getElementById("msg"),prev=document.getElementById("preview"),dims=document.getElementById("dims"),img=null,ratio=1,outUrl=null;
-  function say(t,ok){msg.hidden=false;msg.textContent=t;msg.className="alert "+(ok?"success":"error");}
-  drop.addEventListener("click",function(){file.click();});
-  drop.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();file.click();}});
-  drop.addEventListener("dragover",function(e){e.preventDefault();drop.classList.add("drag");});
-  drop.addEventListener("dragleave",function(e){e.preventDefault();drop.classList.remove("drag");});
-  drop.addEventListener("drop",function(e){e.preventDefault();drop.classList.remove("drag");if(e.dataTransfer.files[0])load(e.dataTransfer.files[0]);});
-  file.addEventListener("change",function(){if(file.files[0])load(file.files[0]);});
-  function load(f){
-    if(!/^image\/(jpeg|png|webp)$/.test(f.type)){say("Please choose JPG/PNG/WebP.",false);return;}
-    var url=URL.createObjectURL(f),im=new Image();
-    im.onload=function(){img=im;ratio=im.naturalWidth/im.naturalHeight;W.value=im.naturalWidth;H.value=im.naturalHeight;go.disabled=false;URL.revokeObjectURL(url);say("Loaded "+im.naturalWidth+"×"+im.naturalHeight+".",true);};
-    im.onerror=function(){say("Could not read image.",false);};im.src=url;
-  }
-  W.addEventListener("input",function(){if(lock.checked&&img&&W.value){H.value=Math.round(W.value/ratio);}});
-  H.addEventListener("input",function(){if(lock.checked&&img&&H.value){W.value=Math.round(H.value*ratio);}});
-  preset.addEventListener("change",function(){if(!preset.value)return;var p=preset.value.split("x");W.value=p[0];H.value=p[1];});
-  go.addEventListener("click",function(){
-    if(!img){say("Upload first.",false);return;}
-    var w=parseInt(W.value,10),h=parseInt(H.value,10);
-    if(!w||!h||w<1||h<1||w>8000||h>8000){say("Enter valid dimensions (1–8000px).",false);return;}
-    var c=document.createElement("canvas");c.width=w;c.height=h;
-    c.getContext("2d").drawImage(img,0,0,w,h);
-    c.toBlob(function(b){if(!b){say("Export failed.",false);return;}if(outUrl)URL.revokeObjectURL(outUrl);outUrl=URL.createObjectURL(b);prev.src=outUrl;prev.hidden=false;dims.textContent="Output: "+w+"×"+h+" ("+(b.size/1024).toFixed(1)+" KB)";dl.disabled=false;say("Resized to "+w+"×"+h+".",true);dl.onclick=function(){var a=document.createElement("a");a.href=outUrl;a.download="resized-"+w+"x"+h+".png";document.body.appendChild(a);a.click();a.remove();};},"image/png");
-  });
-});
-</script>
+<script src="../../assets/js/tool-image-resizer.js" defer></script>
 </body></html>

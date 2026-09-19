@@ -6,7 +6,7 @@
 <meta name="description" content="Generate QR codes from text or URL free. Preview and download PNG in your browser. No login.">
 <link rel="canonical" href="https://adjietegaralamsyah312.github.io/Tools-kits/tools/qr-generator/">
 <meta property="og:type" content="website"><meta property="og:title" content="QR Generator | Tools Kits"><meta property="og:url" content="https://adjietegaralamsyah312.github.io/Tools-kits/tools/qr-generator/">
-<meta property="og:description" content="Create QR codes from text or URL and download PNG."><meta property="og:image" content="https://adjietegaralamsyah312.github.io/Tools-kits/assets/og-image.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="QR Generator | Tools Kits"><meta name="twitter:description" content="Create QR codes from text or URL and download PNG."><meta name="twitter:image" content="https://adjietegaralamsyah312.github.io/Tools-kits/assets/og-image.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="stylesheet" href="../../assets/css/style.css"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"QR Generator","url":"https://adjietegaralamsyah312.github.io/Tools-kits/tools/qr-generator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0"},"description":"Generate QR codes from text or URL free. Preview and download PNG in your browser. No login."}</script>
+<meta property="og:description" content="Create QR codes from text or URL and download PNG."><meta property="og:image" content="https://adjietegaralamsyah312.github.io/Tools-kits/assets/og-image.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="QR Generator | Tools Kits"><meta name="twitter:description" content="Create QR codes from text or URL and download PNG."><meta name="twitter:image" content="https://adjietegaralamsyah312.github.io/Tools-kits/assets/og-image.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="apple-touch-icon" href="../../favicon.svg"><link rel="manifest" href="../../manifest.webmanifest"><meta name="theme-color" content="#2563eb"><meta property="og:site_name" content="Tools Kits"><meta property="og:locale" content="en_US"><link rel="stylesheet" href="../../assets/css/style.css"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://adjietegaralamsyah312.github.io/Tools-kits/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://adjietegaralamsyah312.github.io/Tools-kits/tools/"},{"@type":"ListItem","position":3,"name":"QR Generator","item":"https://adjietegaralamsyah312.github.io/Tools-kits/tools/qr-generator/"}]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"QR Generator","url":"https://adjietegaralamsyah312.github.io/Tools-kits/tools/qr-generator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0"},"description":"Generate QR codes from text or URL free. Preview and download PNG in your browser. No login."}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -36,27 +36,6 @@
 </main>
 <footer class="site"><div class="foot-bottom">© <span data-year>2026</span> Tools Kits</div></footer>
 <script src="../../assets/js/tools-data.js" defer></script><script src="../../assets/js/main.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js" defer></script>
-<script>
-document.addEventListener("DOMContentLoaded",function(){
-  var inp=document.getElementById("in"),size=document.getElementById("size"),ec=document.getElementById("ec"),
-  go=document.getElementById("bGo"),dl=document.getElementById("bDl"),msg=document.getElementById("msg"),cv=document.getElementById("qr");
-  function say(t,ok){msg.hidden=false;msg.textContent=t;msg.className="alert "+(ok?"success":"error");}
-  function draw(){
-    var v=inp.value.trim();if(!v){say("Please enter text or URL first.",false);return;}
-    if(typeof qrcode==="undefined"){say("QR library failed to load (offline/CDN blocked). Check connection and reload.",false);return;}
-    var s=Math.min(1024,Math.max(128,parseInt(size.value,10)||256));
-    try{
-      var qr=qrcode(0,ec.value);qr.addData(v);qr.make();
-      var n=qr.getModuleCount(),ctx=cv.getContext("2d");cv.width=s;cv.height=s;
-      ctx.fillStyle="#fff";ctx.fillRect(0,0,s,s);ctx.fillStyle="#000";
-      var cell=s/n;for(var r=0;r<n;r++)for(var c=0;c<n;c++)if(qr.isDark(r,c))ctx.fillRect(Math.floor(c*cell),Math.floor(r*cell),Math.ceil(cell),Math.ceil(cell));
-      dl.disabled=false;say("QR generated ("+s+"×"+s+").",true);
-    }catch(e){say("Could not generate QR (text too long for this error level?). Try shorter text or level L.",false);}
-  }
-  go.addEventListener("click",draw);
-  dl.addEventListener("click",function(){var a=document.createElement("a");a.href=cv.toDataURL("image/png");a.download="qr.png";document.body.appendChild(a);a.click();a.remove();});
-  draw();
-});
-</script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js" defer crossorigin="anonymous"></script>
+<script src="../../assets/js/tool-qr-generator.js" defer></script>
 </body></html>
