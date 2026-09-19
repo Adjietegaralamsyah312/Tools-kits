@@ -120,6 +120,23 @@
     if(!input||!grid)return;
     var empty=document.getElementById("noResults");
     var activeCat="all";
+    // Support shareable/bookmarkable "?q=" (e.g. /tools/?q=json links).
+    // Prefill once from URL, then keep URL in sync as the user types.
+    var urlSync=true;
+    try{
+      var params=new URLSearchParams(window.location.search);
+      var q0=params.get("q");
+      if(q0!==null&&q0!==""){input.value=q0;}
+    }catch(e){urlSync=false;}
+    function syncUrl(){
+      if(!urlSync||!window.history||!window.history.replaceState)return;
+      try{
+        var url=new URL(window.location.href);
+        var v=input.value.trim();
+        if(v){url.searchParams.set("q",v);}else{url.searchParams.delete("q");}
+        window.history.replaceState(null,"",url.pathname+(url.search?"?"+url.searchParams.toString():"")+url.hash);
+      }catch(e){}
+    }
     function apply(){
       var q=input.value.trim().toLowerCase();
       var shown=0;
@@ -132,7 +149,7 @@
       });
       if(empty)empty.hidden=shown!==0;
     }
-    input.addEventListener("input",apply);
+    input.addEventListener("input",function(){apply();syncUrl();});
     document.querySelectorAll("[data-filter]").forEach(function(btn){
       btn.addEventListener("click",function(){
         document.querySelectorAll("[data-filter]").forEach(function(b){b.setAttribute("aria-pressed","false");});

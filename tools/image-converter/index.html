@@ -6,7 +6,7 @@
 <meta name="description" content="Convert images between JPG, PNG and WebP free in your browser. No upload, preview and download.">
 <link rel="canonical" href="https://adjietegaralamsyah312.github.io/Tools-kits/tools/image-converter/">
 <meta property="og:type" content="website"><meta property="og:title" content="Image Converter | Tools Kits"><meta property="og:url" content="https://adjietegaralamsyah312.github.io/Tools-kits/tools/image-converter/">
-<link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="stylesheet" href="../../assets/css/style.css">
+<meta property="og:description" content="Convert images between JPG, PNG and WebP locally."><meta property="og:image" content="https://adjietegaralamsyah312.github.io/Tools-kits/assets/og-image.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Image Converter | Tools Kits"><meta name="twitter:description" content="Convert images between JPG, PNG and WebP locally."><meta name="twitter:image" content="https://adjietegaralamsyah312.github.io/Tools-kits/assets/og-image.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="stylesheet" href="../../assets/css/style.css"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Image Converter","url":"https://adjietegaralamsyah312.github.io/Tools-kits/tools/image-converter/","applicationCategory":"MultimediaApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0"},"description":"Convert images between JPG, PNG and WebP free in your browser. No upload, preview and download."}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded",function(){
   function say(t,ok){msg.hidden=false;msg.textContent=t;msg.className="alert "+(ok?"success":"error");}
   q.addEventListener("input",function(){qv.textContent=q.value+"%";});
   drop.addEventListener("click",function(){file.click();});
-  drop.addEventListener("keydown",function(e){if(e.key==="Enter")file.click();});
+  drop.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();file.click();}});
   drop.addEventListener("dragover",function(e){e.preventDefault();drop.classList.add("drag");});
   drop.addEventListener("dragleave",function(e){e.preventDefault();drop.classList.remove("drag");});
   drop.addEventListener("drop",function(e){e.preventDefault();drop.classList.remove("drag");if(e.dataTransfer.files[0])load(e.dataTransfer.files[0]);});

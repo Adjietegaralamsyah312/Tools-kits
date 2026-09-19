@@ -6,7 +6,7 @@
 <meta name="description" content="Resize images online free by width/height with aspect-ratio lock and presets. Preview and download. No upload.">
 <link rel="canonical" href="https://adjietegaralamsyah312.github.io/Tools-kits/tools/image-resizer/">
 <meta property="og:type" content="website"><meta property="og:title" content="Image Resizer | Tools Kits"><meta property="og:url" content="https://adjietegaralamsyah312.github.io/Tools-kits/tools/image-resizer/">
-<link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="stylesheet" href="../../assets/css/style.css">
+<meta property="og:description" content="Resize images by width and height with aspect-ratio lock."><meta property="og:image" content="https://adjietegaralamsyah312.github.io/Tools-kits/assets/og-image.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Image Resizer | Tools Kits"><meta name="twitter:description" content="Resize images by width and height with aspect-ratio lock."><meta name="twitter:image" content="https://adjietegaralamsyah312.github.io/Tools-kits/assets/og-image.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="stylesheet" href="../../assets/css/style.css"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Image Resizer","url":"https://adjietegaralamsyah312.github.io/Tools-kits/tools/image-resizer/","applicationCategory":"MultimediaApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0"},"description":"Resize images online free by width/height with aspect-ratio lock and presets. Preview and download. No upload."}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded",function(){
   msg=document.getElementById("msg"),prev=document.getElementById("preview"),dims=document.getElementById("dims"),img=null,ratio=1,outUrl=null;
   function say(t,ok){msg.hidden=false;msg.textContent=t;msg.className="alert "+(ok?"success":"error");}
   drop.addEventListener("click",function(){file.click();});
-  drop.addEventListener("keydown",function(e){if(e.key==="Enter"){file.click();}});
+  drop.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();file.click();}});
   drop.addEventListener("dragover",function(e){e.preventDefault();drop.classList.add("drag");});
   drop.addEventListener("dragleave",function(e){e.preventDefault();drop.classList.remove("drag");});
   drop.addEventListener("drop",function(e){e.preventDefault();drop.classList.remove("drag");if(e.dataTransfer.files[0])load(e.dataTransfer.files[0]);});
