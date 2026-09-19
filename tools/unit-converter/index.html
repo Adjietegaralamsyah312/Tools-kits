@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit Converter Online - Length Weight Temp Data Time | Tools Kits</title>
+<meta name="description" content="Convert length, weight, temperature, data size and time free in your browser. No login.">
+<link rel="canonical" href="https://toolskits.pages.dev/tools/unit-converter/">
+<meta property="og:type" content="website"><meta property="og:title" content="Unit Converter | Tools Kits"><meta property="og:url" content="https://toolskits.pages.dev/tools/unit-converter/">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><nav class="nav" aria-label="Main navigation">
+<a class="brand" href="../../"><span class="brand-mark" aria-hidden="true">T</span> Tools Kits</a>
+<button class="icon-btn menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">☰</button>
+<div class="nav-links" id="navLinks"><a href="../../">Home</a><a href="../">Tools</a><a href="../../blog/">Blog</a><a href="../../about.html">About</a><a href="../../faq.html">FAQ</a><button class="icon-btn" id="themeBtn" aria-label="Switch to dark mode">◐</button></div>
+</nav></header>
+<main id="main" class="container">
+<p class="breadcrumb"><a href="../../">Home</a> / <a href="../">Tools</a> / Unit Converter</p>
+<h1>Unit Converter</h1>
+<p style="color:var(--muted)">Length · weight · temperature · data · time.</p>
+<div class="tool-layout"><div>
+<div class="panel">
+<label class="lbl" for="cat">Category</label>
+<select class="sel" id="cat"><option value="length">Length</option><option value="weight">Weight</option><option value="temp">Temperature</option><option value="data">Data size</option><option value="time">Time</option></select>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-top:.6rem">
+<div><label class="lbl" for="from">From</label><select class="sel" id="from"></select></div>
+<div><label class="lbl" for="to">To</label><select class="sel" id="to"></select></div>
+</div>
+<label class="lbl" for="val">Value</label><input class="in" type="number" id="val" value="1" step="any">
+<div class="output" id="out" tabindex="0" aria-live="polite">Result will appear here.</div>
+</div>
+<article class="prose"><h2>How to use</h2><ol><li>Choose category.</li><li>Pick units, enter value.</li><li>Result updates live.</li></ol>
+<h2>Related tools</h2><div class="related" id="relatedTools" data-tool="unit-converter"></div></article>
+</div><aside class="sidebar"><div class="ad-slot" data-slot="sidebar" aria-hidden="true">AdSlot · sidebar</div></aside></div>
+</main>
+<footer class="site"><div class="foot-bottom">© <span data-year>2026</span> Tools Kits</div></footer>
+<script src="../../assets/js/tools-data.js" defer></script><script src="../../assets/js/main.js" defer></script>
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+  var U={
+    length:{base:"m",units:{mm:.001,cm:.01,m:1,km:1000,in:.0254,ft:.3048,yd:.9144,mi:1609.344}},
+    weight:{base:"kg",units:{mg:1e-6,g:.001,kg:1,t:1000,oz:.028349523125,lb:.45359237}},
+    data:{base:"B",units:{B:1,KB:1024,MB:1048576,GB:1073741824,TB:1099511627776}},
+    time:{base:"s",units:{ms:.001,s:1,min:60,h:3600,day:86400,week:604800}}
+  };
+  var cat=document.getElementById("cat"),from=document.getElementById("from"),to=document.getElementById("to"),val=document.getElementById("val"),out=document.getElementById("out");
+  function fill(){
+    var c=cat.value,keys=c==="temp"?["C","F","K"]:Object.keys(U[c].units);
+    from.innerHTML=keys.map(function(k){return'<option>'+k+'</option>';}).join("");
+    to.innerHTML=keys.map(function(k){return'<option>'+k+'</option>';}).join("");
+    to.selectedIndex=1;convert();
+  }
+  function temp(v,f,t){var c=f==="C"?v:f==="F"?(v-32)*5/9:v-273.15;return t==="C"?c:t==="F"?c*9/5+32:c+273.15;}
+  function convert(){
+    var v=parseFloat(val.value);if(!isFinite(v)){out.textContent="Enter a valid number.";return;}
+    var c=cat.value,f=from.value,t=to.value,r;
+    if(c==="temp")r=temp(v,f,t);else r=v*U[c].units[f]/U[c].units[t];
+    out.textContent=v+" "+f+" = "+(+r.toPrecision(10))+" "+t;
+  }
+  cat.addEventListener("change",fill);from.addEventListener("change",convert);to.addEventListener("change",convert);val.addEventListener("input",convert);
+  fill();
+});
+</script>
+</body></html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UUID Generator Online - Free UUID v4 Bulk | Tools Kits</title>
+<meta name="description" content="Generate UUID v4 online free. Single or bulk up to 1000, copy or download. Browser-based, no login.">
+<link rel="canonical" href="https://toolskits.pages.dev/tools/uuid-generator/">
+<meta property="og:type" content="website"><meta property="og:title" content="UUID Generator | Tools Kits"><meta property="og:url" content="https://toolskits.pages.dev/tools/uuid-generator/">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><nav class="nav" aria-label="Main navigation">
+<a class="brand" href="../../"><span class="brand-mark" aria-hidden="true">T</span> Tools Kits</a>
+<button class="icon-btn menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">☰</button>
+<div class="nav-links" id="navLinks"><a href="../../">Home</a><a href="../">Tools</a><a href="../../blog/">Blog</a><a href="../../about.html">About</a><a href="../../faq.html">FAQ</a><button class="icon-btn" id="themeBtn" aria-label="Switch to dark mode">◐</button></div>
+</nav></header>
+<main id="main" class="container">
+<p class="breadcrumb"><a href="../../">Home</a> / <a href="../">Tools</a> / UUID Generator</p>
+<h1>UUID Generator</h1>
+<p style="color:var(--muted)">Generate cryptographically-random UUID v4. No server involved.</p>
+<div class="tool-layout"><div>
+<div class="panel">
+<label class="lbl" for="count">How many? (1–1000)</label>
+<input class="in" type="number" id="count" value="5" min="1" max="1000">
+<div class="row"><button class="btn primary" id="bG">Generate</button><button class="btn" id="bCopy">Copy</button><button class="btn ghost" id="bDl">Download</button><button class="btn ghost" id="bClear">Clear</button></div>
+<div class="alert" id="msg" hidden role="status"></div>
+<label class="lbl" for="out">Result</label><div class="output" id="out" tabindex="0" aria-live="polite">Press Generate.</div>
+</div>
+<article class="prose"><h2>What is a UUID?</h2><p>A 128-bit Universally Unique Identifier, e.g. <code>550e8400-e29b-41d4-a716-446655440000</code>. v4 is random and ideal for IDs and keys.</p>
+<div class="faq"><h2>FAQ</h2><details><summary>Are UUIDs unique?</summary><p>Collision probability is astronomically low when using crypto randomness.</p></details></div>
+<h2>Related tools</h2><div class="related" id="relatedTools" data-tool="uuid-generator"></div></article>
+</div><aside class="sidebar"><div class="ad-slot" data-slot="sidebar" aria-hidden="true">AdSlot · sidebar</div></aside></div>
+</main>
+<footer class="site"><div class="foot-bottom">© <span data-year>2026</span> Tools Kits</div></footer>
+<script src="../../assets/js/tools-data.js" defer></script><script src="../../assets/js/main.js" defer></script>
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+  var o=document.getElementById("out"),m=document.getElementById("msg");
+  function one(){
+    if(window.crypto&&crypto.randomUUID)return crypto.randomUUID();
+    var b=new Uint8Array(16);crypto.getRandomValues(b);b[6]=(b[6]&15)|64;b[8]=(b[8]&63)|128;
+    var h=[...b].map(function(x){return x.toString(16).padStart(2,"0");}).join("");
+    return h.slice(0,8)+"-"+h.slice(8,12)+"-"+h.slice(12,16)+"-"+h.slice(16,20)+"-"+h.slice(20);
+  }
+  function gen(){
+    var n=Math.min(1000,Math.max(1,parseInt(document.getElementById("count").value,10)||1));
+    var a=[];for(var k=0;k<n;k++)a.push(one());
+    o.textContent=a.join("\n");m.hidden=true;
+  }
+  document.getElementById("bG").addEventListener("click",gen);
+  document.getElementById("bCopy").addEventListener("click",function(){window.tkCopy(o.textContent,m);});
+  document.getElementById("bDl").addEventListener("click",function(){window.tkDownload("uuids.txt",o.textContent,"text/plain");});
+  document.getElementById("bClear").addEventListener("click",function(){o.textContent="Press Generate.";});
+  gen();
+});
+</script>
+</body></html>

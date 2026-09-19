@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JSON Validator Online - Free JSON Checker | Tools Kits</title>
+<meta name="description" content="Validate JSON online for free with clear error messages and line hints. Browser-based, private, no login.">
+<link rel="canonical" href="https://toolskits.pages.dev/tools/json-validator/">
+<meta property="og:type" content="website"><meta property="og:title" content="JSON Validator Online | Tools Kits">
+<meta property="og:description" content="Validate JSON with friendly errors. No upload, no login."><meta property="og:url" content="https://toolskits.pages.dev/tools/json-validator/">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><nav class="nav" aria-label="Main navigation">
+<a class="brand" href="../../"><span class="brand-mark" aria-hidden="true">T</span> Tools Kits</a>
+<button class="icon-btn menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">☰</button>
+<div class="nav-links" id="navLinks"><a href="../../">Home</a><a href="../">Tools</a><a href="../../blog/">Blog</a><a href="../../about.html">About</a><a href="../../faq.html">FAQ</a><button class="icon-btn" id="themeBtn" aria-label="Switch to dark mode">◐</button></div>
+</nav></header>
+<main id="main" class="container">
+<p class="breadcrumb"><a href="../../">Home</a> / <a href="../">Tools</a> / JSON Validator</p>
+<h1>JSON Validator</h1>
+<p style="color:var(--muted)">Validate JSON and get clear, friendly error messages with line hints.</p>
+<div class="tool-layout"><div>
+<div class="panel">
+<label class="lbl" for="in">JSON input</label>
+<textarea class="ta" id="in" placeholder='{"hello":"world"}' spellcheck="false"></textarea>
+<div class="row"><button class="btn primary" id="bV">Validate</button><button class="btn" id="bF">Format</button><button class="btn ghost" id="bC">Clear</button><button class="btn" id="bCopy">Copy result</button></div>
+<div class="alert" id="msg" hidden role="status"></div>
+<div class="output" id="out" tabindex="0" aria-live="polite">Validation result will appear here.</div>
+</div>
+<article class="prose"><h2>What is JSON validation?</h2><p>Validation checks whether your text follows the JSON spec (RFC 8259). Invalid JSON breaks APIs and configs.</p>
+<h2>How to use</h2><ol><li>Paste JSON.</li><li>Click Validate.</li><li>Fix the highlighted line if invalid.</li></ol>
+<div class="faq"><h2>FAQ</h2><details><summary>What are common JSON errors?</summary><p>Trailing commas, single quotes, unquoted keys, comments.</p></details><details><summary>Is data uploaded?</summary><p>No, validation runs locally.</p></details></div>
+<h2>Related tools</h2><div class="related" id="relatedTools" data-tool="json-validator"></div></article>
+</div><aside class="sidebar"><div class="ad-slot" data-slot="sidebar" aria-hidden="true">AdSlot · sidebar</div></aside></div>
+</main>
+<footer class="site"><div class="foot-bottom">© <span data-year>2026</span> Tools Kits</div></footer>
+<script src="../../assets/js/tools-data.js" defer></script><script src="../../assets/js/main.js" defer></script>
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+  var i=document.getElementById("in"),o=document.getElementById("out"),m=document.getElementById("msg");
+  function say(t,ok){m.hidden=false;m.textContent=t;m.className="alert "+(ok?"success":"error");}
+  function validate(silent){var v=i.value.trim();if(!v){say("Please paste some JSON first.",false);return;}try{var r=JSON.parse(v);o.textContent="Valid JSON ✓ ("+Object.keys(r||{}).length+" top-level keys)";say("Valid JSON.",true);}catch(e){var pos=(/position\s+(\d+)/i.exec(e.message)||[])[1];var line="";if(pos!==undefined){line=" near line "+(v.slice(0,+pos).split("\n").length)+".";}o.textContent="Invalid JSON ✗";say("Invalid JSON. Please check the syntax"+line+" ("+e.message+")",false);}}
+  document.getElementById("bV").addEventListener("click",function(){validate();});
+  document.getElementById("bF").addEventListener("click",function(){try{o.textContent=JSON.stringify(JSON.parse(i.value),null,2);say("Formatted.",true);}catch(e){say("Invalid JSON: "+e.message,false);}});
+  document.getElementById("bC").addEventListener("click",function(){i.value="";o.textContent="Validation result will appear here.";m.hidden=true;});
+  document.getElementById("bCopy").addEventListener("click",function(){window.tkCopy(o.textContent,m);});
+});
+</script>
+</body></html>

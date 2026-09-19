@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Resizer Online - Resize by Width Height Free | Tools Kits</title>
+<meta name="description" content="Resize images online free by width/height with aspect-ratio lock and presets. Preview and download. No upload.">
+<link rel="canonical" href="https://toolskits.pages.dev/tools/image-resizer/">
+<meta property="og:type" content="website"><meta property="og:title" content="Image Resizer | Tools Kits"><meta property="og:url" content="https://toolskits.pages.dev/tools/image-resizer/">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><nav class="nav" aria-label="Main navigation">
+<a class="brand" href="../../"><span class="brand-mark" aria-hidden="true">T</span> Tools Kits</a>
+<button class="icon-btn menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">☰</button>
+<div class="nav-links" id="navLinks"><a href="../../">Home</a><a href="../">Tools</a><a href="../../blog/">Blog</a><a href="../../about.html">About</a><a href="../../faq.html">FAQ</a><button class="icon-btn" id="themeBtn" aria-label="Switch to dark mode">◐</button></div>
+</nav></header>
+<main id="main" class="container">
+<p class="breadcrumb"><a href="../../">Home</a> / <a href="../">Tools</a> / Image Resizer</p>
+<h1>Image Resizer</h1>
+<p style="color:var(--muted)">Resize locally — no upload. Lock aspect ratio or use presets.</p>
+<div class="tool-layout"><div>
+<div class="panel">
+<div class="drop" id="drop" role="button" tabindex="0" aria-label="Upload image"><p><strong>Drop image here</strong> or <u>browse</u></p><input type="file" id="file" accept="image/jpeg,image/png,image/webp" class="sr" aria-label="Choose image"></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-top:.8rem">
+<div><label class="lbl" for="w">Width (px)</label><input class="in" type="number" id="w" min="1" max="8000" placeholder="800"></div>
+<div><label class="lbl" for="h">Height (px)</label><input class="in" type="number" id="h" min="1" max="8000" placeholder="600"></div>
+</div>
+<label style="display:flex;gap:.5rem;align-items:center;margin-top:.6rem"><input type="checkbox" id="lock" checked> Lock aspect ratio</label>
+<label class="lbl" for="preset">Preset sizes</label>
+<select class="sel" id="preset"><option value="">Custom…</option><option value="320x240">Small 320×240</option><option value="640x480">Medium 640×480</option><option value="1280x720">HD 1280×720</option><option value="1920x1080">Full HD 1920×1080</option><option value="1080x1080">Square 1080×1080 (Instagram)</option></select>
+<div class="row"><button class="btn primary" id="bGo" disabled>Resize</button><button class="btn" id="bDl" disabled>Download</button></div>
+<div class="alert" id="msg" hidden role="status"></div>
+<img class="preview-img" id="preview" alt="Resized preview" hidden>
+<p style="color:var(--muted);font-size:.88rem" id="dims"></p>
+</div>
+<article class="prose"><h2>How to use</h2><ol><li>Upload.</li><li>Set width/height or preset.</li><li>Resize &amp; download.</li></ol>
+<h2>Related tools</h2><div class="related" id="relatedTools" data-tool="image-resizer"></div></article>
+</div><aside class="sidebar"><div class="ad-slot" data-slot="sidebar" aria-hidden="true">AdSlot · sidebar</div></aside></div>
+</main>
+<footer class="site"><div class="foot-bottom">© <span data-year>2026</span> Tools Kits</div></footer>
+<script src="../../assets/js/tools-data.js" defer></script><script src="../../assets/js/main.js" defer></script>
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+  var drop=document.getElementById("drop"),file=document.getElementById("file"),W=document.getElementById("w"),H=document.getElementById("h"),
+  lock=document.getElementById("lock"),preset=document.getElementById("preset"),go=document.getElementById("bGo"),dl=document.getElementById("bDl"),
+  msg=document.getElementById("msg"),prev=document.getElementById("preview"),dims=document.getElementById("dims"),img=null,ratio=1,outUrl=null;
+  function say(t,ok){msg.hidden=false;msg.textContent=t;msg.className="alert "+(ok?"success":"error");}
+  drop.addEventListener("click",function(){file.click();});
+  drop.addEventListener("keydown",function(e){if(e.key==="Enter"){file.click();}});
+  drop.addEventListener("dragover",function(e){e.preventDefault();drop.classList.add("drag");});
+  drop.addEventListener("dragleave",function(e){e.preventDefault();drop.classList.remove("drag");});
+  drop.addEventListener("drop",function(e){e.preventDefault();drop.classList.remove("drag");if(e.dataTransfer.files[0])load(e.dataTransfer.files[0]);});
+  file.addEventListener("change",function(){if(file.files[0])load(file.files[0]);});
+  function load(f){
+    if(!/^image\/(jpeg|png|webp)$/.test(f.type)){say("Please choose JPG/PNG/WebP.",false);return;}
+    var url=URL.createObjectURL(f),im=new Image();
+    im.onload=function(){img=im;ratio=im.naturalWidth/im.naturalHeight;W.value=im.naturalWidth;H.value=im.naturalHeight;go.disabled=false;URL.revokeObjectURL(url);say("Loaded "+im.naturalWidth+"×"+im.naturalHeight+".",true);};
+    im.onerror=function(){say("Could not read image.",false);};im.src=url;
+  }
+  W.addEventListener("input",function(){if(lock.checked&&img&&W.value){H.value=Math.round(W.value/ratio);}});
+  H.addEventListener("input",function(){if(lock.checked&&img&&H.value){W.value=Math.round(H.value*ratio);}});
+  preset.addEventListener("change",function(){if(!preset.value)return;var p=preset.value.split("x");W.value=p[0];H.value=p[1];});
+  go.addEventListener("click",function(){
+    if(!img){say("Upload first.",false);return;}
+    var w=parseInt(W.value,10),h=parseInt(H.value,10);
+    if(!w||!h||w<1||h<1||w>8000||h>8000){say("Enter valid dimensions (1–8000px).",false);return;}
+    var c=document.createElement("canvas");c.width=w;c.height=h;
+    c.getContext("2d").drawImage(img,0,0,w,h);
+    c.toBlob(function(b){if(!b){say("Export failed.",false);return;}if(outUrl)URL.revokeObjectURL(outUrl);outUrl=URL.createObjectURL(b);prev.src=outUrl;prev.hidden=false;dims.textContent="Output: "+w+"×"+h+" ("+(b.size/1024).toFixed(1)+" KB)";dl.disabled=false;say("Resized to "+w+"×"+h+".",true);dl.onclick=function(){var a=document.createElement("a");a.href=outUrl;a.download="resized-"+w+"x"+h+".png";document.body.appendChild(a);a.click();a.remove();};},"image/png");
+  });
+});
+</script>
+</body></html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Word Counter Online - Free Character & Reading Time | Tools Kits</title>
+<meta name="description" content="Count words, characters, sentences, paragraphs and reading time in real time. Free, private, no login.">
+<link rel="canonical" href="https://toolskits.pages.dev/tools/word-counter/">
+<meta property="og:type" content="website"><meta property="og:title" content="Word Counter | Tools Kits"><meta property="og:url" content="https://toolskits.pages.dev/tools/word-counter/">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><nav class="nav" aria-label="Main navigation">
+<a class="brand" href="../../"><span class="brand-mark" aria-hidden="true">T</span> Tools Kits</a>
+<button class="icon-btn menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">☰</button>
+<div class="nav-links" id="navLinks"><a href="../../">Home</a><a href="../">Tools</a><a href="../../blog/">Blog</a><a href="../../about.html">About</a><a href="../../faq.html">FAQ</a><button class="icon-btn" id="themeBtn" aria-label="Switch to dark mode">◐</button></div>
+</nav></header>
+<main id="main" class="container">
+<p class="breadcrumb"><a href="../../">Home</a> / <a href="../">Tools</a> / Word Counter</p>
+<h1>Word Counter</h1>
+<p style="color:var(--muted)">Live counts as you type. Nothing is uploaded.</p>
+<div class="tool-layout"><div>
+<div class="panel">
+<label class="lbl" for="in">Your text</label>
+<textarea class="ta" id="in" placeholder="Type or paste text here..." aria-describedby="stats"></textarea>
+<div class="stats" id="stats" aria-live="polite">
+<div class="stat"><b id="w">0</b><span>words</span></div>
+<div class="stat"><b id="c">0</b><span>characters</span></div>
+<div class="stat"><b id="cns">0</b><span>chars excl. spaces</span></div>
+<div class="stat"><b id="s">0</b><span>sentences</span></div>
+<div class="stat"><b id="p">0</b><span>paragraphs</span></div>
+<div class="stat"><b id="r">0 min</b><span>reading time</span></div>
+</div>
+<div class="row"><button class="btn" id="bCopy">Copy text</button><button class="btn ghost" id="bClear">Clear</button></div>
+<div class="alert" id="msg" hidden role="status"></div>
+</div>
+<article class="prose"><h2>How to use</h2><ol><li>Paste text.</li><li>Counts update in real time.</li></ol>
+<div class="faq"><h2>FAQ</h2><details><summary>How is reading time calculated?</summary><p>Words ÷ 200 words per minute, rounded up to the nearest 10 seconds.</p></details></div>
+<h2>Related tools</h2><div class="related" id="relatedTools" data-tool="word-counter"></div></article>
+</div><aside class="sidebar"><div class="ad-slot" data-slot="sidebar" aria-hidden="true">AdSlot · sidebar</div></aside></div>
+</main>
+<footer class="site"><div class="foot-bottom">© <span data-year>2026</span> Tools Kits</div></footer>
+<script src="../../assets/js/tools-data.js" defer></script><script src="../../assets/js/main.js" defer></script>
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+  var i=document.getElementById("in"),m=document.getElementById("msg");
+  var w=document.getElementById("w"),c=document.getElementById("c"),cns=document.getElementById("cns"),s=document.getElementById("s"),p=document.getElementById("p"),r=document.getElementById("r");
+  function update(){
+    var t=i.value;
+    c.textContent=t.length;
+    cns.textContent=t.replace(/\s/g,"").length;
+    var words=(t.trim().match(/\S+/g)||[]);
+    w.textContent=words.length;
+    var sent=(t.match(/[^.!?]+[.!?]+(\s|$)/g)||[]).length;
+    if(t.trim()&&!sent&&/\w/.test(t))sent=1;
+    s.textContent=sent;
+    p.textContent=t.trim()?t.split(/\n\s*\n/).filter(function(x){return x.trim();}).length:0;
+    var mins=words.length/200,sec=Math.ceil(mins*60/10)*10;
+    r.textContent=sec<60?sec+" sec":(mins<1?"<1 min":Math.ceil(mins)+" min");
+  }
+  i.addEventListener("input",update);update();
+  document.getElementById("bClear").addEventListener("click",function(){i.value="";update();i.focus();});
+  document.getElementById("bCopy").addEventListener("click",function(){window.tkCopy(i.value,m);});
+});
+</script>
+</body></html>

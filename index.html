@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tools Kits — Free Online Tools for Everyday Work</title>
+<meta name="description" content="Free, fast, privacy-friendly online tools for developers, students and everyone. JSON, Base64, images, text, QR and more — no login required.">
+<link rel="canonical" href="https://toolskits.pages.dev/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Tools Kits — Free Online Tools for Everyday Work">
+<meta property="og:description" content="Fast, simple and privacy-friendly tools for developers, students and everyone.">
+<meta property="og:url" content="https://toolskits.pages.dev/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Tools Kits — Free Online Tools">
+<meta name="twitter:description" content="Fast, simple and privacy-friendly tools. No login required.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#2563eb">
+<link rel="stylesheet" href="assets/css/style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Tools Kits","url":"https://toolskits.pages.dev/","description":"Free online tools — fast, simple, privacy-friendly.","potentialAction":{"@type":"SearchAction","target":"https://toolskits.pages.dev/tools/?q={query}","query-input":"required name=query"}}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site">
+<nav class="nav" aria-label="Main navigation">
+<a class="brand" href="./"><span class="brand-mark" aria-hidden="true">T</span> Tools Kits</a>
+<button class="icon-btn menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">☰</button>
+<div class="nav-links" id="navLinks">
+<a href="./" aria-current="page">Home</a>
+<a href="tools/">Tools</a>
+<a href="blog/">Blog</a>
+<a href="about.html">About</a>
+<a href="faq.html">FAQ</a>
+<button class="icon-btn" id="themeBtn" aria-label="Switch to dark mode">◐</button>
+</div>
+</nav>
+</header>
+<main id="main" class="container">
+<section class="hero">
+<span class="badge">🔒 100% free · No login · Privacy-friendly</span>
+<h1>Free Online Tools for Everyday Work</h1>
+<p class="sub">Fast, simple and privacy-friendly tools for developers, students and everyone.</p>
+<div class="search-wrap">
+<span class="search-icon" aria-hidden="true">🔍</span>
+<input type="search" id="toolSearch" placeholder="Search tools... (try &quot;json&quot;)" aria-label="Search tools" autocomplete="off">
+</div>
+<p style="color:var(--muted);font-size:.9rem;margin-top:.6rem"><span id="toolCount">18 free tools</span> · runs in your browser</p>
+</section>
+<section aria-label="Filter by category">
+<div class="filters" role="group" aria-label="Category filter">
+<button data-filter="all" aria-pressed="true">All</button>
+<button data-filter="developer" aria-pressed="false">Developer</button>
+<button data-filter="text" aria-pressed="false">Text</button>
+<button data-filter="image" aria-pressed="false">Image</button>
+<button data-filter="utility" aria-pressed="false">Utility</button>
+</div>
+</section>
+<section class="section" aria-label="Popular tools">
+<h2>Popular tools</h2>
+<p class="lead">Most-used tools, all processed locally in your browser.</p>
+<div class="grid tools-grid" id="toolsGrid" data-base="tools/"></div>
+<p id="noResults" hidden style="color:var(--muted)">No tools found. Try another keyword.</p>
+</section>
+<section class="section">
+<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+<div class="panel"><h2 style="font-size:1.1rem">🔒 Privacy-first</h2><p style="color:var(--muted);font-size:.93rem;margin:0">JSON, images and text never leave your device. No uploads, no accounts, no invasive tracking.</p></div>
+<div class="panel"><h2 style="font-size:1.1rem">⚡ Fast &amp; mobile-friendly</h2><p style="color:var(--muted);font-size:.93rem;margin:0">Minimal JavaScript, responsive layout tested from 320px to 1440px, no horizontal overflow.</p></div>
+<div class="panel"><h2 style="font-size:1.1rem">🧩 Easy to extend</h2><p style="color:var(--muted);font-size:.93rem;margin:0">Single tool registry in <code>assets/js/tools-data.js</code>. Add one entry + one folder to ship a new tool.</p></div>
+</div>
+</section>
+<div class="ad-slot" data-slot="bottom" aria-hidden="true">AdSlot · bottom<small>Monetization-ready placeholder. No ads loaded in development.</small></div>
+</main>
+<footer class="site">
+<div class="foot">
+<div><a class="brand" href="./"><span class="brand-mark" aria-hidden="true">T</span> Tools Kits</a>
+<p style="color:var(--muted);font-size:.9rem">Free Online Tools — Fast, Simple, Privacy-Friendly. All tools run in your browser.</p></div>
+<div><h4>Tools</h4><ul><li><a href="tools/json-formatter/">JSON Formatter</a></li><li><a href="tools/base64/">Base64</a></li><li><a href="tools/word-counter/">Word Counter</a></li><li><a href="tools/image-compressor/">Image Compressor</a></li><li><a href="tools/">All tools</a></li></ul></div>
+<div><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li><li><a href="blog/">Blog</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+<div><h4>Legal</h4><ul><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li></ul></div>
+</div>
+<div class="foot-bottom">© <span data-year>2026</span> Tools Kits · Free tools, no login required.</div>
+</footer>
+<script src="assets/js/tools-data.js" defer></script>
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>

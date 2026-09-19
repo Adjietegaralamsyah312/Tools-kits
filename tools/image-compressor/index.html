@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Compressor Online - Compress JPG PNG WebP Free | Tools Kits</title>
+<meta name="description" content="Compress JPG, PNG and WebP images free in your browser. Quality slider, before/after size, preview and download. No upload.">
+<link rel="canonical" href="https://toolskits.pages.dev/tools/image-compressor/">
+<meta property="og:type" content="website"><meta property="og:title" content="Image Compressor | Tools Kits"><meta property="og:url" content="https://toolskits.pages.dev/tools/image-compressor/">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><nav class="nav" aria-label="Main navigation">
+<a class="brand" href="../../"><span class="brand-mark" aria-hidden="true">T</span> Tools Kits</a>
+<button class="icon-btn menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">☰</button>
+<div class="nav-links" id="navLinks"><a href="../../">Home</a><a href="../">Tools</a><a href="../../blog/">Blog</a><a href="../../about.html">About</a><a href="../../faq.html">FAQ</a><button class="icon-btn" id="themeBtn" aria-label="Switch to dark mode">◐</button></div>
+</nav></header>
+<main id="main" class="container">
+<p class="breadcrumb"><a href="../../">Home</a> / <a href="../">Tools</a> / Image Compressor</p>
+<h1>Image Compressor</h1>
+<p style="color:var(--muted)">Drag &amp; drop or upload. Processed locally with Canvas — your images never leave this device.</p>
+<div class="tool-layout"><div>
+<div class="panel">
+<div class="drop" id="drop" role="button" tabindex="0" aria-label="Upload image: drag and drop or press Enter to browse">
+<p><strong>Drop image here</strong> or <u>browse files</u></p>
+<p style="color:var(--muted);font-size:.85rem">JPG · PNG · WebP · max ~20MB</p>
+<input type="file" id="file" accept="image/jpeg,image/png,image/webp" class="sr" aria-label="Choose image file">
+</div>
+<div style="display:grid;gap:.8rem;margin-top:.8rem;grid-template-columns:1fr 1fr">
+<div><label class="lbl" for="quality">Quality: <span id="qVal">80%</span></label><input type="range" id="quality" min="10" max="95" value="80"></div>
+<div><label class="lbl" for="format">Output format</label><select class="sel" id="format"><option value="image/jpeg">JPG</option><option value="image/png">PNG</option><option value="image/webp">WebP (if supported)</option></select></div>
+</div>
+<div class="row"><button class="btn primary" id="bGo" disabled>Compress</button><button class="btn" id="bDl" disabled>Download</button></div>
+<div class="alert" id="msg" hidden role="status"></div>
+<div class="stats" id="stats" hidden>
+<div class="stat"><b id="sBefore">—</b><span>before</span></div>
+<div class="stat"><b id="sAfter">—</b><span>after</span></div>
+<div class="stat"><b id="sSaved">—</b><span>saved</span></div>
+</div>
+<img class="preview-img" id="preview" alt="Compressed image preview" hidden>
+</div>
+<article class="prose"><h2>How to use</h2><ol><li>Upload image.</li><li>Adjust quality.</li><li>Click Compress, preview, download.</li></ol>
+<div class="faq"><h2>FAQ</h2><details><summary>Are my images uploaded?</summary><p>No. Everything runs via Canvas/Web APIs locally.</p></details><details><summary>Which format is smallest?</summary><p>Usually WebP, then JPG for photos. PNG stays lossless and may stay large.</p></details></div>
+<h2>Related tools</h2><div class="related" id="relatedTools" data-tool="image-compressor"></div></article>
+</div><aside class="sidebar"><div class="ad-slot" data-slot="sidebar" aria-hidden="true">AdSlot · sidebar</div></aside></div>
+</main>
+<footer class="site"><div class="foot-bottom">© <span data-year>2026</span> Tools Kits</div></footer>
+<script src="../../assets/js/tools-data.js" defer></script><script src="../../assets/js/main.js" defer></script>
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+  var drop=document.getElementById("drop"),file=document.getElementById("file"),q=document.getElementById("quality"),qv=document.getElementById("qVal"),
+  fmt=document.getElementById("format"),go=document.getElementById("bGo"),dl=document.getElementById("bDl"),msg=document.getElementById("msg"),
+  prev=document.getElementById("preview"),stats=document.getElementById("stats"),img=null,origSize=0,outBlob=null,fileName="compressed.jpg";
+  function say(t,ok){msg.hidden=false;msg.textContent=t;msg.className="alert "+(ok?"success":"error");}
+  function fmtSize(b){return b>1048576?(b/1048576).toFixed(2)+" MB":(b/1024).toFixed(1)+" KB";}
+  q.addEventListener("input",function(){qv.textContent=q.value+"%";});
+  drop.addEventListener("click",function(){file.click();});
+  drop.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();file.click();}});
+  ["dragover","dragenter"].forEach(function(ev){drop.addEventListener(ev,function(e){e.preventDefault();drop.classList.add("drag");});});
+  ["dragleave","drop"].forEach(function(ev){drop.addEventListener(ev,function(e){e.preventDefault();drop.classList.remove("drag");});});
+  drop.addEventListener("drop",function(e){if(e.dataTransfer.files[0])load(e.dataTransfer.files[0]);});
+  file.addEventListener("change",function(){if(file.files[0])load(file.files[0]);});
+  function load(f){
+    if(!/^image\/(jpeg|png|webp)$/.test(f.type)){say("Please choose a JPG, PNG or WebP image.",false);return;}
+    if(f.size>20*1048576){say("File too large (max 20MB).",false);return;}
+    fileName=f.name.replace(/\.\w+$/,"")+"-compressed.jpg";
+    origSize=f.size;var url=URL.createObjectURL(f),im=new Image();
+    im.onload=function(){img=im;go.disabled=false;URL.revokeObjectURL(url);say("Image loaded ("+fmtSize(origSize)+"). Adjust quality and compress.",true);};
+    im.onerror=function(){say("Could not read that image.",false);};
+    im.src=url;
+  }
+  go.addEventListener("click",function(){
+    if(!img){say("Upload an image first.",false);return;}
+    var type=fmt.value;
+    // feature-detect webp
+    var c=document.createElement("canvas");c.width=img.naturalWidth;c.height=img.naturalHeight;
+    var ctx=c.getContext("2d");if(type==="image/jpeg"){ctx.fillStyle="#fff";ctx.fillRect(0,0,c.width,c.height);}
+    ctx.drawImage(img,0,0);
+    var quality=parseInt(q.value,10)/100;
+    c.toBlob(function(blob){
+      if(!blob){say("This browser cannot export "+type+". Try JPG.",false);return;}
+      // fallback if webp unsupported (blob will be png)
+      outBlob=blob;var url=URL.createObjectURL(blob);
+      prev.src=url;prev.hidden=false;
+      stats.hidden=false;
+      document.getElementById("sBefore").textContent=fmtSize(origSize);
+      document.getElementById("sAfter").textContent=fmtSize(blob.size);
+      var pct=origSize?Math.round((1-blob.size/origSize)*100):0;
+      document.getElementById("sSaved").textContent=pct+"%";
+      dl.disabled=false;say("Compressed: "+fmtSize(origSize)+" → "+fmtSize(blob.size)+" ("+pct+"% smaller).",true);
+    },type,type==="image/png"?undefined:quality);
+  });
+  dl.addEventListener("click",function(){
+    if(!outBlob)return;var a=document.createElement("a");a.href=URL.createObjectURL(outBlob);
+    var ext=fmt.value==="image/png"?".png":fmt.value==="image/webp"?".webp":".jpg";
+    a.download=fileName.replace(/\.\w+$/,ext);document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},500);
+  });
+});
+</script>
+</body></html>

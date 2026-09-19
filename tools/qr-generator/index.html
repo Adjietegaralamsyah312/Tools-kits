@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QR Code Generator Online - Free Text & URL to QR | Tools Kits</title>
+<meta name="description" content="Generate QR codes from text or URL free. Preview and download PNG in your browser. No login.">
+<link rel="canonical" href="https://toolskits.pages.dev/tools/qr-generator/">
+<meta property="og:type" content="website"><meta property="og:title" content="QR Generator | Tools Kits"><meta property="og:url" content="https://toolskits.pages.dev/tools/qr-generator/">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><nav class="nav" aria-label="Main navigation">
+<a class="brand" href="../../"><span class="brand-mark" aria-hidden="true">T</span> Tools Kits</a>
+<button class="icon-btn menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">☰</button>
+<div class="nav-links" id="navLinks"><a href="../../">Home</a><a href="../">Tools</a><a href="../../blog/">Blog</a><a href="../../about.html">About</a><a href="../../faq.html">FAQ</a><button class="icon-btn" id="themeBtn" aria-label="Switch to dark mode">◐</button></div>
+</nav></header>
+<main id="main" class="container">
+<p class="breadcrumb"><a href="../../">Home</a> / <a href="../">Tools</a> / QR Generator</p>
+<h1>QR Generator</h1>
+<p style="color:var(--muted)">Text or URL → QR → download PNG. Library loads only on this page.</p>
+<div class="tool-layout"><div>
+<div class="panel">
+<label class="lbl" for="in">Text / URL</label><textarea class="ta short" id="in" placeholder="https://example.com">https://toolskits.pages.dev/</textarea>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem">
+<div><label class="lbl" for="size">Size (px)</label><input class="in" type="number" id="size" value="256" min="128" max="1024"></div>
+<div><label class="lbl" for="ec">Error correction</label><select class="sel" id="ec"><option value="M">M — standard</option><option value="L">L — low</option><option value="Q">Q — high</option><option value="H">H — highest</option></select></div>
+</div>
+<div class="row"><button class="btn primary" id="bGo">Generate</button><button class="btn" id="bDl" disabled>Download PNG</button></div>
+<div class="alert" id="msg" hidden role="status"></div>
+<div style="text-align:center;margin-top:.8rem"><canvas id="qr" width="256" height="256" style="border:1px solid var(--border);border-radius:12px;max-width:100%" role="img" aria-label="QR code preview"></canvas></div>
+</div>
+<article class="prose"><h2>How to use</h2><ol><li>Enter text/URL.</li><li>Click Generate.</li><li>Download PNG.</li></ol>
+<h2>Related tools</h2><div class="related" id="relatedTools" data-tool="qr-generator"></div></article>
+</div><aside class="sidebar"><div class="ad-slot" data-slot="sidebar" aria-hidden="true">AdSlot · sidebar</div></aside></div>
+</main>
+<footer class="site"><div class="foot-bottom">© <span data-year>2026</span> Tools Kits</div></footer>
+<script src="../../assets/js/tools-data.js" defer></script><script src="../../assets/js/main.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js" defer></script>
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+  var inp=document.getElementById("in"),size=document.getElementById("size"),ec=document.getElementById("ec"),
+  go=document.getElementById("bGo"),dl=document.getElementById("bDl"),msg=document.getElementById("msg"),cv=document.getElementById("qr");
+  function say(t,ok){msg.hidden=false;msg.textContent=t;msg.className="alert "+(ok?"success":"error");}
+  function draw(){
+    var v=inp.value.trim();if(!v){say("Please enter text or URL first.",false);return;}
+    if(typeof qrcode==="undefined"){say("QR library failed to load (offline/CDN blocked). Check connection and reload.",false);return;}
+    var s=Math.min(1024,Math.max(128,parseInt(size.value,10)||256));
+    try{
+      var qr=qrcode(0,ec.value);qr.addData(v);qr.make();
+      var n=qr.getModuleCount(),ctx=cv.getContext("2d");cv.width=s;cv.height=s;
+      ctx.fillStyle="#fff";ctx.fillRect(0,0,s,s);ctx.fillStyle="#000";
+      var cell=s/n;for(var r=0;r<n;r++)for(var c=0;c<n;c++)if(qr.isDark(r,c))ctx.fillRect(Math.floor(c*cell),Math.floor(r*cell),Math.ceil(cell),Math.ceil(cell));
+      dl.disabled=false;say("QR generated ("+s+"×"+s+").",true);
+    }catch(e){say("Could not generate QR (text too long for this error level?). Try shorter text or level L.",false);}
+  }
+  go.addEventListener("click",draw);
+  dl.addEventListener("click",function(){var a=document.createElement("a");a.href=cv.toDataURL("image/png");a.download="qr.png";document.body.appendChild(a);a.click();a.remove();});
+  draw();
+});
+</script>
+</body></html>

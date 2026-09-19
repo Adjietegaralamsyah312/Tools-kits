@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Converter Online - UPPER, lower, Title, camelCase | Tools Kits</title>
+<meta name="description" content="Convert text case online free: UPPERCASE, lowercase, Title Case, Sentence case, camelCase, snake_case, kebab-case. Private, no login.">
+<link rel="canonical" href="https://toolskits.pages.dev/tools/case-converter/">
+<meta property="og:type" content="website"><meta property="og:title" content="Case Converter | Tools Kits"><meta property="og:url" content="https://toolskits.pages.dev/tools/case-converter/">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><nav class="nav" aria-label="Main navigation">
+<a class="brand" href="../../"><span class="brand-mark" aria-hidden="true">T</span> Tools Kits</a>
+<button class="icon-btn menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">☰</button>
+<div class="nav-links" id="navLinks"><a href="../../">Home</a><a href="../">Tools</a><a href="../../blog/">Blog</a><a href="../../about.html">About</a><a href="../../faq.html">FAQ</a><button class="icon-btn" id="themeBtn" aria-label="Switch to dark mode">◐</button></div>
+</nav></header>
+<main id="main" class="container">
+<p class="breadcrumb"><a href="../../">Home</a> / <a href="../">Tools</a> / Case Converter</p>
+<h1>Case Converter</h1>
+<p style="color:var(--muted)">Convert between 7 common cases instantly.</p>
+<div class="tool-layout"><div>
+<div class="panel">
+<label class="lbl" for="in">Input</label><textarea class="ta short" id="in" placeholder="hello world example"></textarea>
+<div class="row">
+<button class="btn" data-case="upper">UPPERCASE</button><button class="btn" data-case="lower">lowercase</button>
+<button class="btn" data-case="title">Title Case</button><button class="btn" data-case="sentence">Sentence case</button>
+<button class="btn" data-case="camel">camelCase</button><button class="btn" data-case="snake">snake_case</button>
+<button class="btn" data-case="kebab">kebab-case</button>
+</div>
+<div class="row"><button class="btn primary" id="bCopy">Copy result</button><button class="btn ghost" id="bClear">Clear</button></div>
+<div class="alert" id="msg" hidden role="status"></div>
+<label class="lbl" for="out">Result</label><div class="output" id="out" tabindex="0" aria-live="polite">Result will appear here.</div>
+</div>
+<article class="prose"><h2>How to use</h2><ol><li>Paste text.</li><li>Click a case button.</li><li>Copy.</li></ol>
+<h2>Related tools</h2><div class="related" id="relatedTools" data-tool="case-converter"></div></article>
+</div><aside class="sidebar"><div class="ad-slot" data-slot="sidebar" aria-hidden="true">AdSlot · sidebar</div></aside></div>
+</main>
+<footer class="site"><div class="foot-bottom">© <span data-year>2026</span> Tools Kits</div></footer>
+<script src="../../assets/js/tools-data.js" defer></script><script src="../../assets/js/main.js" defer></script>
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+  var i=document.getElementById("in"),o=document.getElementById("out"),m=document.getElementById("msg");
+  function words(s){return s.trim().split(/[\s_\-]+/).filter(Boolean);}
+  function cap(s){return s.charAt(0).toUpperCase()+s.slice(1).toLowerCase();}
+  var fn={
+    upper:function(s){return s.toUpperCase();},
+    lower:function(s){return s.toLowerCase();},
+    title:function(s){return words(s).map(cap).join(" ");},
+    sentence:function(s){var t=s.toLowerCase().trim();return t.charAt(0).toUpperCase()+t.slice(1);},
+    camel:function(s){var w=words(s.toLowerCase());return w.map(function(x,k){return k===0?x:cap(x);}).join("");},
+    snake:function(s){return words(s).join("_").toLowerCase();},
+    kebab:function(s){return words(s).join("-").toLowerCase();}
+  };
+  document.querySelectorAll("[data-case]").forEach(function(b){b.addEventListener("click",function(){
+    if(!i.value){m.hidden=false;m.textContent="Please enter some text first.";m.className="alert error";return;}
+    o.textContent=fn[b.getAttribute("data-case")](i.value);m.hidden=true;
+  });});
+  document.getElementById("bCopy").addEventListener("click",function(){window.tkCopy(o.textContent,m);});
+  document.getElementById("bClear").addEventListener("click",function(){i.value="";o.textContent="Result will appear here.";});
+});
+</script>
+</body></html>

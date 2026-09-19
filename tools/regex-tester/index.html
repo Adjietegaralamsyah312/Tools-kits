@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regex Tester Online - Free Regular Expression Tool | Tools Kits</title>
+<meta name="description" content="Test regex online free with live matches, count and friendly errors. Flags supported. Private, no login.">
+<link rel="canonical" href="https://toolskits.pages.dev/tools/regex-tester/">
+<meta property="og:type" content="website"><meta property="og:title" content="Regex Tester | Tools Kits"><meta property="og:url" content="https://toolskits.pages.dev/tools/regex-tester/">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="stylesheet" href="../../assets/css/style.css">
+<style>.hl{background:#fde68a;border-radius:3px;padding:0 1px}[data-theme="dark"] .hl{background:#584412;color:#fff}</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><nav class="nav" aria-label="Main navigation">
+<a class="brand" href="../../"><span class="brand-mark" aria-hidden="true">T</span> Tools Kits</a>
+<button class="icon-btn menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">☰</button>
+<div class="nav-links" id="navLinks"><a href="../../">Home</a><a href="../">Tools</a><a href="../../blog/">Blog</a><a href="../../about.html">About</a><a href="../../faq.html">FAQ</a><button class="icon-btn" id="themeBtn" aria-label="Switch to dark mode">◐</button></div>
+</nav></header>
+<main id="main" class="container">
+<p class="breadcrumb"><a href="../../">Home</a> / <a href="../">Tools</a> / Regex Tester</p>
+<h1>Regex Tester</h1>
+<p style="color:var(--muted)">Live matching with flags, count and safe error messages.</p>
+<div class="tool-layout"><div>
+<div class="panel">
+<label class="lbl" for="re">Regular expression (without / /)</label>
+<input class="in" id="re" placeholder="\d+(\.\d+)?" value="\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b" spellcheck="false">
+<fieldset style="border:1px solid var(--border);border-radius:10px;margin-top:.7rem"><legend style="padding:0 .4rem">Flags</legend>
+<label><input type="checkbox" id="fG" checked> g (global)</label>
+<label><input type="checkbox" id="fI" checked> i (ignore case)</label>
+<label><input type="checkbox" id="fM"> m (multiline)</label>
+<label><input type="checkbox" id="fS"> s (dotAll)</label>
+<label><input type="checkbox" id="fU"> u (unicode)</label>
+</fieldset>
+<label class="lbl" for="txt">Test text</label>
+<textarea class="ta" id="txt">Contact us at hello@example.com or support@toolskits.dev for help. Invalid: user@@example..com</textarea>
+<div class="alert" id="msg" hidden role="status"></div>
+<p><strong>Matches: <span id="count">0</span></strong></p>
+<div class="output" id="out" tabindex="0" aria-live="polite"></div>
+</div>
+<article class="prose"><h2>Safety note</h2><p>Very complex patterns (e.g. nested <code>(a+)+</code>) can freeze any browser. Keep test text under ~50k characters; this tool caps matches at 500.</p>
+<h2>Related tools</h2><div class="related" id="relatedTools" data-tool="regex-tester"></div></article>
+</div><aside class="sidebar"><div class="ad-slot" data-slot="sidebar" aria-hidden="true">AdSlot · sidebar</div></aside></div>
+</main>
+<footer class="site"><div class="foot-bottom">© <span data-year>2026</span> Tools Kits</div></footer>
+<script src="../../assets/js/tools-data.js" defer></script><script src="../../assets/js/main.js" defer></script>
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+  var re=document.getElementById("re"),txt=document.getElementById("txt"),out=document.getElementById("out"),msg=document.getElementById("msg"),count=document.getElementById("count");
+  function flags(){var f="";if(document.getElementById("fG").checked)f+="g";if(document.getElementById("fI").checked)f+="i";if(document.getElementById("fM").checked)f+="m";if(document.getElementById("fS").checked)f+="s";if(document.getElementById("fU").checked)f+="u";return f;}
+  function esc(s){return s.replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+  function run(){
+    var pat=re.value,t=txt.value;
+    if(t.length>50000){msg.hidden=false;msg.textContent="Test text too long (max 50,000 chars) to keep the browser responsive.";msg.className="alert error";return;}
+    var rx;try{rx=new RegExp(pat,flags());msg.hidden=true;}catch(e){msg.hidden=false;msg.textContent="Invalid regex: "+e.message;msg.className="alert error";out.textContent="Fix the pattern to see matches.";count.textContent="0";return;}
+    try{
+      var matches,n=0,last=0,html="";
+      if(rx.global){rx.lastIndex=0;var m;while((m=rx.exec(t))!==null){n++;if(n>500)break;html+=esc(t.slice(last,m.index))+'<mark class="hl">'+esc(m[0]||"(empty)")+"</mark>";last=m.index+m[0].length;if(m[0]===""){rx.lastIndex++;}}}else{var s=t.match(rx);if(s){n=1;html=esc(t.slice(0,s.index))+'<mark class="hl">'+esc(s[0])+"</mark>"+esc(t.slice(s.index+s[0].length));}else html=esc(t);}
+      html+=esc(t.slice(last));
+      if(rx.global===false&&n===0)html=esc(t);
+      out.innerHTML=html||"(no text)";
+      count.textContent=n>500?"500+ (capped)":String(n);
+    }catch(e){msg.hidden=false;msg.textContent="Matching failed safely: "+e.message;msg.className="alert error";}
+  }
+  ["re","txt","fG","fI","fM","fS","fU"].forEach(function(id){document.getElementById(id).addEventListener("input",run);});
+  run();
+});
+</script>
+</body></html>

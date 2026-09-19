@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Base64 Encoder Decoder Online - Free | Tools Kits</title>
+<meta name="description" content="Encode and decode Base64 text online for free. Unicode-safe, browser-based, private. No login.">
+<link rel="canonical" href="https://toolskits.pages.dev/tools/base64/">
+<meta property="og:type" content="website"><meta property="og:title" content="Base64 Encoder / Decoder | Tools Kits">
+<meta property="og:description" content="Encode and decode Base64 safely client-side."><meta property="og:url" content="https://toolskits.pages.dev/tools/base64/">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="stylesheet" href="../../assets/css/style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Base64 Encoder Decoder","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0"}}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><nav class="nav" aria-label="Main navigation">
+<a class="brand" href="../../"><span class="brand-mark" aria-hidden="true">T</span> Tools Kits</a>
+<button class="icon-btn menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">☰</button>
+<div class="nav-links" id="navLinks"><a href="../../">Home</a><a href="../">Tools</a><a href="../../blog/">Blog</a><a href="../../about.html">About</a><a href="../../faq.html">FAQ</a><button class="icon-btn" id="themeBtn" aria-label="Switch to dark mode">◐</button></div>
+</nav></header>
+<main id="main" class="container">
+<p class="breadcrumb"><a href="../../">Home</a> / <a href="../">Tools</a> / Base64</p>
+<h1>Base64 Encoder / Decoder</h1>
+<p style="color:var(--muted)">Encode and decode Base64 text safely in your browser. Unicode supported.</p>
+<div class="tool-layout"><div>
+<div class="panel">
+<label class="lbl" for="in">Input</label><textarea class="ta" id="in" placeholder="Hello world or aGVsbG8="></textarea>
+<div class="row"><button class="btn primary" id="bE">Encode</button><button class="btn primary" id="bD">Decode</button><button class="btn" id="bCopy">Copy</button><button class="btn ghost" id="bClear">Clear</button><button class="btn ghost" id="bDl">Download</button></div>
+<div class="alert" id="msg" hidden role="status"></div>
+<label class="lbl" for="out">Result</label><div class="output" id="out" tabindex="0" aria-live="polite">Result will appear here.</div>
+</div>
+<article class="prose"><h2>What is Base64?</h2><p>Base64 encodes binary data as ASCII text, commonly used for data URIs, tokens and email attachments. It is <strong>not encryption</strong>.</p>
+<h2>How to use</h2><ol><li>Paste text.</li><li>Click Encode or Decode.</li><li>Copy or download.</li></ol>
+<div class="faq"><h2>FAQ</h2><details><summary>Does it support Unicode/emoji?</summary><p>Yes, via UTF-8 TextEncoder/TextDecoder.</p></details><details><summary>Is Base64 secure?</summary><p>No. Anyone can decode it. Never use it for passwords.</p></details></div>
+<h2>Related tools</h2><div class="related" id="relatedTools" data-tool="base64"></div></article>
+</div><aside class="sidebar"><div class="ad-slot" data-slot="sidebar" aria-hidden="true">AdSlot · sidebar</div></aside></div>
+</main>
+<footer class="site"><div class="foot-bottom">© <span data-year>2026</span> Tools Kits</div></footer>
+<script src="../../assets/js/tools-data.js" defer></script><script src="../../assets/js/main.js" defer></script>
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+  var i=document.getElementById("in"),o=document.getElementById("out"),m=document.getElementById("msg");
+  function say(t,ok){m.hidden=false;m.textContent=t;m.className="alert "+(ok?"success":"error");}
+  function enc(s){var b=new TextEncoder().encode(s),bin="";b.forEach(function(x){bin+=String.fromCharCode(x);});return btoa(bin);}
+  function dec(s){s=s.trim().replace(/\s+/g,"");var bin=atob(s),bytes=new Uint8Array(bin.length);for(var k=0;k<bin.length;k++)bytes[k]=bin.charCodeAt(k);return new TextDecoder().decode(bytes);}
+  document.getElementById("bE").addEventListener("click",function(){if(!i.value){say("Please enter some text first.",false);return;}try{o.textContent=enc(i.value);say("Encoded successfully.",true);}catch(e){say("Encode failed: "+e.message,false);}});
+  document.getElementById("bD").addEventListener("click",function(){if(!i.value.trim()){say("Please enter Base64 to decode.",false);return;}try{o.textContent=dec(i.value);say("Decoded successfully.",true);}catch(e){say("Invalid Base64. Please check your input.",false);}});
+  document.getElementById("bCopy").addEventListener("click",function(){window.tkCopy(o.textContent,m);});
+  document.getElementById("bClear").addEventListener("click",function(){i.value="";o.textContent="Result will appear here.";m.hidden=true;});
+  document.getElementById("bDl").addEventListener("click",function(){window.tkDownload("base64.txt",o.textContent,"text/plain");});
+});
+</script>
+</body></html>

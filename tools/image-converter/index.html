@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Converter Online - JPG PNG WebP Free | Tools Kits</title>
+<meta name="description" content="Convert images between JPG, PNG and WebP free in your browser. No upload, preview and download.">
+<link rel="canonical" href="https://toolskits.pages.dev/tools/image-converter/">
+<meta property="og:type" content="website"><meta property="og:title" content="Image Converter | Tools Kits"><meta property="og:url" content="https://toolskits.pages.dev/tools/image-converter/">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><nav class="nav" aria-label="Main navigation">
+<a class="brand" href="../../"><span class="brand-mark" aria-hidden="true">T</span> Tools Kits</a>
+<button class="icon-btn menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">☰</button>
+<div class="nav-links" id="navLinks"><a href="../../">Home</a><a href="../">Tools</a><a href="../../blog/">Blog</a><a href="../../about.html">About</a><a href="../../faq.html">FAQ</a><button class="icon-btn" id="themeBtn" aria-label="Switch to dark mode">◐</button></div>
+</nav></header>
+<main id="main" class="container">
+<p class="breadcrumb"><a href="../../">Home</a> / <a href="../">Tools</a> / Image Converter</p>
+<h1>Image Converter</h1>
+<p style="color:var(--muted)">JPG ↔ PNG ↔ WebP, converted locally.</p>
+<div class="tool-layout"><div>
+<div class="panel">
+<div class="drop" id="drop" role="button" tabindex="0" aria-label="Upload image"><p><strong>Drop image here</strong> or <u>browse</u></p><input type="file" id="file" accept="image/jpeg,image/png,image/webp" class="sr" aria-label="Choose image"></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-top:.8rem">
+<div><label class="lbl" for="fmt">Convert to</label><select class="sel" id="fmt"><option value="image/jpeg">JPG</option><option value="image/png">PNG</option><option value="image/webp">WebP</option></select></div>
+<div><label class="lbl" for="q">Quality (JPG/WebP): <span id="qv">90%</span></label><input type="range" id="q" min="10" max="100" value="90"></div>
+</div>
+<div class="row"><button class="btn primary" id="bGo" disabled>Convert</button><button class="btn" id="bDl" disabled>Download</button></div>
+<div class="alert" id="msg" hidden role="status"></div>
+<img class="preview-img" id="preview" alt="Converted preview" hidden>
+</div>
+<article class="prose"><h2>How to use</h2><ol><li>Upload.</li><li>Pick target format.</li><li>Convert &amp; download.</li></ol>
+<h2>Related tools</h2><div class="related" id="relatedTools" data-tool="image-converter"></div></article>
+</div><aside class="sidebar"><div class="ad-slot" data-slot="sidebar" aria-hidden="true">AdSlot · sidebar</div></aside></div>
+</main>
+<footer class="site"><div class="foot-bottom">© <span data-year>2026</span> Tools Kits</div></footer>
+<script src="../../assets/js/tools-data.js" defer></script><script src="../../assets/js/main.js" defer></script>
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+  var drop=document.getElementById("drop"),file=document.getElementById("file"),fmt=document.getElementById("fmt"),q=document.getElementById("q"),qv=document.getElementById("qv"),
+  go=document.getElementById("bGo"),dl=document.getElementById("bDl"),msg=document.getElementById("msg"),prev=document.getElementById("preview"),img=null,outUrl=null,base="image";
+  function say(t,ok){msg.hidden=false;msg.textContent=t;msg.className="alert "+(ok?"success":"error");}
+  q.addEventListener("input",function(){qv.textContent=q.value+"%";});
+  drop.addEventListener("click",function(){file.click();});
+  drop.addEventListener("keydown",function(e){if(e.key==="Enter")file.click();});
+  drop.addEventListener("dragover",function(e){e.preventDefault();drop.classList.add("drag");});
+  drop.addEventListener("dragleave",function(e){e.preventDefault();drop.classList.remove("drag");});
+  drop.addEventListener("drop",function(e){e.preventDefault();drop.classList.remove("drag");if(e.dataTransfer.files[0])load(e.dataTransfer.files[0]);});
+  file.addEventListener("change",function(){if(file.files[0])load(file.files[0]);});
+  function load(f){if(!/^image\/(jpeg|png|webp)$/.test(f.type)){say("Choose JPG/PNG/WebP.",false);return;}base=f.name.replace(/\.\w+$/,"");var url=URL.createObjectURL(f),im=new Image();im.onload=function(){img=im;go.disabled=false;URL.revokeObjectURL(url);say("Loaded "+im.naturalWidth+"×"+im.naturalHeight+".",true);};im.onerror=function(){say("Could not read image.",false);};im.src=url;}
+  go.addEventListener("click",function(){
+    if(!img){say("Upload first.",false);return;}
+    var c=document.createElement("canvas");c.width=img.naturalWidth;c.height=img.naturalHeight;var ctx=c.getContext("2d");
+    if(fmt.value==="image/jpeg"){ctx.fillStyle="#fff";ctx.fillRect(0,0,c.width,c.height);}
+    ctx.drawImage(img,0,0);
+    c.toBlob(function(b){if(!b){say("Format not supported by this browser. Try JPG/PNG.",false);return;}if(outUrl)URL.revokeObjectURL(outUrl);outUrl=URL.createObjectURL(b);prev.src=outUrl;prev.hidden=false;dl.disabled=false;var ext=fmt.value==="image/png"?".png":fmt.value==="image/webp"?".webp":".jpg";dl.onclick=function(){var a=document.createElement("a");a.href=outUrl;a.download=base+"-converted"+ext;document.body.appendChild(a);a.click();a.remove();};say("Converted to "+fmt.selectedOptions[0].text+" ("+(b.size/1024).toFixed(1)+" KB).",true);},fmt.value,fmt.value==="image/png"?undefined:q.value/100);
+  });
+});
+</script>
+</body></html>
