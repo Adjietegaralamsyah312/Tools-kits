@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://toolskits.pages.dev/sitemap.xml
+Sitemap: https://adjietegaralamsyah312.github.io/Tools-kits/sitemap.xml

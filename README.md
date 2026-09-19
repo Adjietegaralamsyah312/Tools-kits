@@ -53,7 +53,7 @@ Buka `http://localhost:8000/`.
 
 - Tidak ada secret, tidak ada `.env`, tidak ada backend.
 - Build: tidak ada (`npm run build` tidak tersedia — sengaja zero-build).
-- Deploy Cloudflare Pages: connect repo → Build command kosong → Output directory `/`. `_headers` otomatis terapkan CSP + hardening.
+- Deploy GitHub Pages: push ke branch main → Settings → Pages → Deploy from branch → folder `/ (root)`. `_headers` hanya berlaku di Cloudflare (diabaikan GitHub, harmless).
 
 ## Security
 
@@ -70,7 +70,7 @@ Buka `http://localhost:8000/`.
 - `sitemap.xml`, `robots.txt`, `manifest.webmanifest`, `favicon.svg`.
 - Schema.org: `WebSite+SearchAction` (home), `WebApplication` (tools), `FAQPage` (JSON formatter, FAQ).
 - Internal linking: Related Tools per halaman + footer + `/tools/` index.
-- Ganti canonical base `https://toolskits.pages.dev/` dengan domain asli sebelum produksi.
+- Canonical base saat ini: `https://adjietegaralamsyah312.github.io/Tools-kits/` (GitHub Pages project site).
 
 ## Testing
 
@@ -90,4 +90,4 @@ python3 -m http.server 8000
 ## Perintah ringkas
 
 - Run: `python3 -m http.server 8000`
-- Deploy: push → Cloudflare Pages (no build command, output `/`)
+- Deploy: push → GitHub Pages (branch main, folder `/` root)
