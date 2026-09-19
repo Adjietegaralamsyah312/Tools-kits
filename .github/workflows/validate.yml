@@ -29,10 +29,15 @@ jobs:
               P().feed(f.read_text(encoding="utf-8"))
             except Exception as e:
               fail(f"{f}: HTML parse error {e}")
-          # 2. Old domain + dangerous JS
+          # 2. Old domain + dangerous JS — APP SOURCE ONLY.
+          # Do NOT scan README.md / *.md / docs / CI files (.github/):
+          # they legitimately document these patterns
+          # (e.g. "No eval()", old-domain migration notes).
+          app_js = list(root.glob("assets/**/*.js")) + list(root.glob("tools/**/*.js"))
+          site_meta = [root/"sitemap.xml", root/"robots.txt", root/"manifest.webmanifest"]
           txt_all = []
-          for f in list(htmls) + list(root.glob("assets/js/*.js")) + [root/"sitemap.xml", root/"robots.txt", root/"README.md"]:
-            if f.exists(): txt_all.append((str(f), f.read_text(encoding="utf-8", errors="replace")))
+          for f in list(htmls) + app_js + site_meta:
+            if f.exists() and f.is_file(): txt_all.append((str(f), f.read_text(encoding="utf-8", errors="replace")))
           for name, t in txt_all:
             if "toolskits.pages.dev" in t.lower(): fail(f"{name}: contains old domain toolskits.pages.dev")
             if re.search(r"eval\s*\(", t): fail(f"{name}: contains eval(")
