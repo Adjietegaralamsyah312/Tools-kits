@@ -83,12 +83,15 @@ jobs:
           # 6. Relative asset paths (static check)
           for f in htmls:
             t = f.read_text(encoding="utf-8")
+            if f.name == "404.html":
+              for asset in ["/Tools-kits/assets/css/style.css", "/Tools-kits/favicon.svg"]:
+                if asset not in t: fail(f"{f}: missing {asset}")
+              continue
             depth = len(f.parent.relative_to(root).parts) if f.parent != root else 0
             prefix = "../" * depth if depth else ""
             # css/js/favicon expectations by depth
-            for asset in [f"{prefix}assets/css/style.css", f"{prefix}assets/js/main.js"]:
-              if f.name == "404.html": continue
-              if asset not in t and "assets/" in t: pass
+            for asset in [f"{prefix}assets/css/style.css", f"{prefix}assets/js/main.js", f"{prefix}favicon.svg"]:
+              if asset not in t: fail(f"{f}: missing {asset}")
           print("done")
           if fails:
             print(f"{len(fails)} FAILURES"); sys.exit(1)

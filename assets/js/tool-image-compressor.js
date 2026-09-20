@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded",function(){
   var MAX_PIXELS=50*1000*1000;  // 50 MP source cap (memory safety)
   var drop=document.getElementById("drop"),file=document.getElementById("file"),q=document.getElementById("quality"),qv=document.getElementById("qVal"),
   fmt=document.getElementById("format"),go=document.getElementById("bGo"),dl=document.getElementById("bDl"),msg=document.getElementById("msg"),
-  prev=document.getElementById("preview"),stats=document.getElementById("stats"),img=null,origSize=0,outBlob=null,prevUrl=null,fileName="compressed.jpg";
+  prev=document.getElementById("preview"),stats=document.getElementById("stats"),img=null,origSize=0,outBlob=null,prevUrl=null,fileName="compressed";
   function say(t,ok){msg.hidden=false;msg.textContent=t;msg.className="alert "+(ok?"success":"error");}
   function fmtSize(b){return b>1048576?(b/1048576).toFixed(2)+" MB":(b/1024).toFixed(1)+" KB";}
   function extFor(mime){return mime==="image/png"?".png":mime==="image/webp"?".webp":".jpg";}

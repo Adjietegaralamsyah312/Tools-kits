@@ -47,7 +47,8 @@ document.addEventListener("DOMContentLoaded",function(){
   function tick(){var n=Date.now();document.getElementById("now").textContent=Math.floor(n/1000)+"s / "+n+"ms — "+new Date(n).toLocaleString();}tick();setInterval(tick,1000);
   document.getElementById("bNow").addEventListener("click",function(){var n=Date.now();if(unit.value==="ms")ts.value=n;else ts.value=Math.floor(n/1000);var d=new Date(n);dt.value=new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,16);});
   document.getElementById("bT2D").addEventListener("click",function(){
-    var v=Number(String(ts.value).trim());if(!isFinite(v)){say("Enter a valid number.",false);return;}
+    var raw=String(ts.value).trim();if(!raw){say("Enter a timestamp first.",false);return;}
+    var v=Number(raw);if(!isFinite(v)){say("Enter a valid number.",false);return;}
     var ms=unit.value==="ms"?v:v*1000;var d=new Date(ms);if(isNaN(d)){say("Invalid timestamp.",false);return;}
     out.textContent="Local: "+d.toLocaleString()+"\nUTC: "+d.toUTCString()+"\nISO: "+d.toISOString()+"\nms: "+d.getTime()+" / s: "+Math.floor(d.getTime()/1000);msg.hidden=true;
   });

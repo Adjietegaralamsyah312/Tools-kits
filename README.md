@@ -10,7 +10,7 @@ Production URL: `https://adjietegaralamsyah312.github.io/Tools-kits/`
 - HTML (semantic, per-tool `index.html` for clean URLs `/tools/<slug>/`)
 - CSS custom (`assets/css/style.css`, CSS variables, dark mode via `data-theme`)
 - JavaScript vanilla, no build step (`assets/js/main.js`, `assets/js/tools-data.js`, page-specific `assets/js/tool-*.js`)
-- 1 CDN lib, lazy on one page only: `qrcode-generator` on QR Generator (with `crossorigin="anonymous"`; SRI omitted because jsDelivr warns against SRI for dynamically generated files — run `python3 scripts/vendor_qr.py` to self-host `assets/js/qrcode-generator.min.js` fully offline; page logic in `assets/js/tool-qr-generator.js` with 2000-char cap + friendly errors)
+- Zero third-party requests: `qrcode-generator` QR library is self-hosted at `assets/js/qrcode-generator.min.js` (pinned 1.4.4; re-vendor via `python3 scripts/vendor_qr.py`); page logic in `assets/js/tool-qr-generator.js` with 2000-char cap + friendly errors
 - Deploy target: GitHub Pages (static). `_headers` is kept only for a possible future Cloudflare deployment — it is **ignored by GitHub Pages**, so documented security headers there are NOT active on the production URL.
 
 ## Struktur folder
@@ -26,7 +26,7 @@ assets/js/main.js         (theme, nav, search/filter with ?q=, copy/download hel
 assets/js/tool-*.js       (page-specific logic for big tools: image-compressor/resizer/converter, regex-tester, hash-generator, qr-generator)
 assets/js/regex-worker.js (Web Worker for Regex Tester, terminable on 1.5s timeout)
 assets/og-image.png       (1200x630 social preview — generate via script, see Testing)
-assets/icon-192.png, icon-512.png, apple-touch-icon.png (generate via python3 scripts/generate_icons.py; manifest currently uses favicon.svg + og-image.png to avoid broken refs)
+assets/icon-192.png, icon-512.png, apple-touch-icon.png (PWA icons referenced by manifest.webmanifest + apple-touch-icon links; regenerate via python3 scripts/generate_icons.py if the logo changes)
 scripts/vendor_qr.py, scripts/generate_icons.py (stdlib-only helpers, no build)
 .nojekyll                 (GitHub Pages: disable Jekyll processing)
 .github/workflows/validate.yml  (lightweight static CI, no build)
