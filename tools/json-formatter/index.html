@@ -65,7 +65,7 @@
 <script src="../../assets/js/tools-data.js" defer></script><script src="../../assets/js/main.js" defer></script>
 <script>
 document.addEventListener("DOMContentLoaded",function(){
-  var input=document.getElementById("jsonInput"),out=document.getElementById("jsonOutput"),msg=document.getElementById("jsonMsg");
+  var input=document.getElementById("jsonInput"),out=document.getElementById("jsonOutput"),msg=document.getElementById("jsonMsg"),hasResult=false;
   function showMsg(text,ok){msg.hidden=false;msg.textContent=text;msg.className="alert "+(ok?"success":"error");}
   function friendlyError(e,raw){
     var m=/position\s+(\d+)/i.exec(e.message)||/column\s+(\d+)/i.exec(e.message);
@@ -74,12 +74,12 @@ document.addEventListener("DOMContentLoaded",function(){
     return "Invalid JSON. Please check the syntax"+lineInfo+" ("+e.message+")";
   }
   function parse(){var v=input.value.trim();if(!v){showMsg("Please paste some JSON first.",false);return null;}try{return JSON.parse(v);}catch(e){showMsg(friendlyError(e,input.value),false);return undefined;}}
-  document.getElementById("btnFormat").addEventListener("click",function(){var r=parse();if(r===null||r===undefined)return;out.textContent=JSON.stringify(r,null,2);showMsg("JSON is valid. Formatted successfully.",true);});
-  document.getElementById("btnValidate").addEventListener("click",function(){var r=parse();if(r===null||r===undefined)return;out.textContent="Valid JSON ✓";showMsg("Valid JSON.",true);});
-  document.getElementById("btnMinify").addEventListener("click",function(){var r=parse();if(r===null||r===undefined)return;out.textContent=JSON.stringify(r);showMsg("Minified successfully.",true);});
+  document.getElementById("btnFormat").addEventListener("click",function(){var r=parse();if(r===null||r===undefined)return;out.textContent=JSON.stringify(r,null,2);hasResult=true;showMsg("JSON is valid. Formatted successfully.",true);});
+  document.getElementById("btnValidate").addEventListener("click",function(){var r=parse();if(r===null||r===undefined)return;out.textContent="Valid JSON ✓";hasResult=false;showMsg("Valid JSON.",true);});
+  document.getElementById("btnMinify").addEventListener("click",function(){var r=parse();if(r===null||r===undefined)return;out.textContent=JSON.stringify(r);hasResult=true;showMsg("Minified successfully.",true);});
   document.getElementById("btnCopy").addEventListener("click",function(){window.tkCopy(out.textContent,msg);});
-  document.getElementById("btnClear").addEventListener("click",function(){input.value="";out.textContent="Result will appear here.";msg.hidden=true;input.focus();});
-  document.getElementById("btnDownload").addEventListener("click",function(){if(!out.textContent||out.textContent.indexOf("Result")==0){showMsg("Nothing to download yet.",false);return;}window.tkDownload("formatted.json",out.textContent,"application/json");});
+  document.getElementById("btnClear").addEventListener("click",function(){input.value="";out.textContent="Result will appear here.";hasResult=false;msg.hidden=true;input.focus();});
+  document.getElementById("btnDownload").addEventListener("click",function(){if(!hasResult){showMsg("Nothing to download yet.",false);return;}window.tkDownload("formatted.json",out.textContent,"application/json");});
 });
 </script>
 </body></html>

@@ -93,13 +93,6 @@
     renderToolCards();
   });
 
-  function toolCard(t){
-    return '<article class="card" data-cat="'+esc(t.category)+'" data-search="'+esc((t.name+" "+t.description+" "+t.category).toLowerCase())+'">'+
-      '<div class="meta"><span class="pill">'+esc(t.icon)+'</span><span class="pill">'+esc(t.category)+'</span></div>'+
-      '<h3><a href="'+(location.pathname.indexOf("/tools")>-1?"":"tools/")+esc(t.slug)+'/">'+esc(t.name)+'</a></h3>'+
-      '<p>'+esc(t.description)+'</p></article>';
-  }
-
   function renderToolCards(){
     var grid=document.getElementById("toolsGrid");
     if(!grid||!window.TOOLS)return;
