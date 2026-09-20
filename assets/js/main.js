@@ -9,12 +9,14 @@
     else if(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches){root.setAttribute("data-theme","dark");}
   }
   themeInit();
+  /* i18n language state (default Indonesian; engine in i18n.js owns the rest). */
+  function __L(){try{return localStorage.getItem("tk-lang")||"id";}catch(e){return"id";}}
   function toggleTheme(){
     var cur=root.getAttribute("data-theme")==="dark"?"light":"dark";
     root.setAttribute("data-theme",cur);
     try{localStorage.setItem("tk-theme",cur);}catch(e){}
     var b=document.getElementById("themeBtn");
-    if(b)b.setAttribute("aria-label",cur==="dark"?"Switch to light mode":"Switch to dark mode");
+    if(b)b.setAttribute("aria-label",cur==="dark"?(__L()==="en"?"Switch to light mode":"Beralih ke mode terang"):(__L()==="en"?"Switch to dark mode":"Beralih ke mode gelap"));
   }
   // Analytics placeholder – enable later without collecting tool inputs.
   window.ToolskitsAnalytics={track:function(){},page:function(){}};
@@ -28,15 +30,15 @@
       msgEl.textContent=msg;msgEl.className="alert "+(ok?"success":"error");msgEl.hidden=false;
     }
     if(navigator.clipboard&&navigator.clipboard.writeText){
-      navigator.clipboard.writeText(text).then(function(){done(true,"Copied to clipboard.");},function(){fallback();});
+      navigator.clipboard.writeText(text).then(function(){done(true,__L()==="en"?"Copied to clipboard.":"Disalin ke papan klip.");},function(){fallback();});
     }else{fallback();}
     function fallback(){
       try{
         var ta=document.createElement("textarea");ta.value=text;ta.setAttribute("readonly","");ta.style.position="fixed";ta.style.opacity="0";
         document.body.appendChild(ta);ta.select();
         var ok=document.execCommand("copy");document.body.removeChild(ta);
-        done(!!ok,ok?"Copied to clipboard.":"Copy failed. Please select and copy manually.");
-      }catch(e){done(false,"Copy failed. Please select and copy manually.");}
+        done(!!ok,ok?(__L()==="en"?"Copied to clipboard.":"Disalin ke papan klip."):(__L()==="en"?"Copy failed. Please select and copy manually.":"Gagal menyalin. Silakan pilih dan salin manual."));
+      }catch(e){done(false,__L()==="en"?"Copy failed. Please select and copy manually.":"Gagal menyalin. Silakan pilih dan salin manual.");}
     }
   }
   window.tkCopy=copyText;
@@ -58,7 +60,7 @@
       if(!mb||!nl)return;
       nl.classList.toggle("open",open);
       mb.setAttribute("aria-expanded",open?"true":"false");
-      mb.setAttribute("aria-label",open?"Close menu":"Open menu");
+      mb.setAttribute("aria-label",open?(__L()==="en"?"Close menu":"Tutup menu"):(__L()==="en"?"Open menu":"Buka menu"));
       mb.textContent=open?"\u00D7":"\u2630";
     }
     function toggleMenu(){setMenu(!isMenuOpen());}
@@ -101,7 +103,7 @@
         '<h3><a href="'+esc(base)+esc(t.slug)+'/">'+esc(t.name)+'</a></h3><p>'+esc(t.description)+'</p></article>';
     }).join("");
     var count=document.getElementById("toolCount");
-    if(count)count.textContent=window.TOOLS.length+" free tools";
+    if(count)count.textContent=window.TOOLS.length+(__L()==="en"?" free tools":" alat gratis");
     bindSearch();
   }
 
@@ -150,4 +152,16 @@
     });
     apply();
   }
+})();
+/* i18n bootstrap: load dict + engine from this file's directory (depth-agnostic,
+ * keeps HTML untouched). Ordered execution via async=false. Silent if missing. */
+(function(){
+  try{
+    var src=(document.currentScript&&document.currentScript.src)||"";
+    if(src.indexOf("main.js")===-1)return;
+    var base=src.replace(/main\.js(\?.*)?$/,"");
+    ["i18n-dict.js","i18n-dict-tools.js","i18n.js"].forEach(function(f){
+      var s=document.createElement("script");s.src=base+f;s.async=false;document.head.appendChild(s);
+    });
+  }catch(e){}
 })();

@@ -9,9 +9,9 @@ document.addEventListener("DOMContentLoaded", function () {
   function say(t, ok) { msg.hidden = false; msg.textContent = t; msg.className = "alert " + (ok ? "success" : "error"); }
   function draw() {
     var v = inp.value.trim();
-    if (!v) { say("Please enter text or URL first.", false); return; }
-    if (v.length > MAX_LEN) { say("Text too long (max " + MAX_LEN + " chars) for a reliable QR.", false); return; }
-    if (typeof qrcode === "undefined") { say("QR library failed to load. Reload the page (assets/js/qrcode-generator.min.js missing?).", false); return; }
+    if (!v) { say("Silakan masukkan teks atau URL terlebih dahulu.", false); return; }
+    if (v.length > MAX_LEN) { say("Teks terlalu panjang (maks " + MAX_LEN + " karakter) agar QR tetap andal.", false); return; }
+    if (typeof qrcode === "undefined") { say("Pustaka QR gagal dimuat. Muat ulang halaman (assets/js/qrcode-generator.min.js hilang?).", false); return; }
     var s = Math.min(1024, Math.max(128, parseInt(size.value, 10) || 256));
     try {
       var qr = qrcode(0, ec.value); qr.addData(v); qr.make();
@@ -20,8 +20,8 @@ document.addEventListener("DOMContentLoaded", function () {
       ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, s, s); ctx.fillStyle = "#000";
       var cell = s / n;
       for (var r = 0; r < n; r++) for (var c = 0; c < n; c++) if (qr.isDark(r, c)) ctx.fillRect(Math.floor(c * cell), Math.floor(r * cell), Math.ceil(cell), Math.ceil(cell));
-      dl.disabled = false; say("QR generated (" + s + "×" + s + ").", true);
-    } catch (e) { say("Could not generate QR (text too long for this error level?). Try shorter text or level L.", false); }
+      dl.disabled = false; say("QR dibuat (" + s + "×" + s + ").", true);
+    } catch (e) { say("Gagal membuat QR (teks terlalu panjang untuk level koreksi ini?). Coba teks lebih pendek atau level L.", false); }
   }
   go.addEventListener("click", draw);
   dl.addEventListener("click", function () {

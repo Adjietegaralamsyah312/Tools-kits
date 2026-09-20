@@ -109,7 +109,7 @@
     function say(t, ok) { m.hidden = false; m.textContent = t; m.className = "alert " + (ok ? "success" : "error"); }
     if (!md5SelfTest()) {
       try { if (typeof console !== "undefined" && console.error) console.error("[Tools Kits] MD5 self-test FAILED"); } catch (e) {}
-      say("Internal error: MD5 self-test failed. Results may be incorrect.", false);
+      say("Kesalahan internal: uji mandiri MD5 gagal. Hasil mungkin tidak akurat.", false);
       return;
     }
     function sha(algo, text) {
@@ -120,8 +120,8 @@
     }
     document.getElementById("bGo").addEventListener("click", function () {
       var v = inp.value;
-      if (!v) { say("Please enter some text first.", false); return; }
-      if (v.length > 500000) { say("Input too long (max 500,000 chars).", false); return; }
+      if (!v) { say("Silakan masukkan teks terlebih dahulu.", false); return; }
+      if (v.length > 500000) { say("Input terlalu panjang (maks 500,000 karakter).", false); return; }
       document.getElementById("hMd5").textContent = md5Hex(v);
       var hasCrypto = false;
       try { hasCrypto = !!(window.crypto && crypto.subtle && window.isSecureContext !== false); } catch (e) { hasCrypto = false; }
@@ -130,18 +130,18 @@
           document.getElementById("hSha1").textContent = r[0];
           document.getElementById("hSha256").textContent = r[1];
           document.getElementById("hSha512").textContent = r[2];
-          say("Hashes generated (SHA via Web Crypto).", true);
+          say("Hash dibuat (SHA via Web Crypto).", true);
         }).catch(function () {
           document.getElementById("hSha1").textContent = sha1fb(v);
-          document.getElementById("hSha256").textContent = "Unavailable (needs HTTPS/secure context)";
-          document.getElementById("hSha512").textContent = "Unavailable (needs HTTPS/secure context)";
-          say("MD5 + SHA-1 generated locally. SHA-256/512 need HTTPS.", true);
+          document.getElementById("hSha256").textContent = "Tidak tersedia (perlu HTTPS/konteks aman)";
+          document.getElementById("hSha512").textContent = "Tidak tersedia (perlu HTTPS/konteks aman)";
+          say("MD5 + SHA-1 dibuat secara lokal. SHA-256/512 perlu HTTPS.", true);
         });
       } else {
         document.getElementById("hSha1").textContent = sha1fb(v);
-        document.getElementById("hSha256").textContent = "Unavailable (needs HTTPS/secure context)";
-        document.getElementById("hSha512").textContent = "Unavailable (needs HTTPS/secure context)";
-        say("MD5 + SHA-1 generated locally. SHA-256/512 need HTTPS.", true);
+        document.getElementById("hSha256").textContent = "Tidak tersedia (perlu HTTPS/konteks aman)";
+        document.getElementById("hSha512").textContent = "Tidak tersedia (perlu HTTPS/konteks aman)";
+        say("MD5 + SHA-1 dibuat secara lokal. SHA-256/512 perlu HTTPS.", true);
       }
     });
     document.getElementById("bCopy").addEventListener("click", function () {

@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     out = document.getElementById("out"), msg = document.getElementById("msg"),
     count = document.getElementById("count");
   var MAX_PAT = 500, MAX_TXT = 50000, MAX_MATCH = 500, BUDGET_MS = 1500;
-  var UNAVAILABLE = "Regex Worker is unavailable. This browser cannot safely run the test.";
+  var UNAVAILABLE = "Regex Worker tidak tersedia. Browser ini tidak dapat menjalankan pengujian dengan aman.";
   var worker = null, timer = null, seq = 0;
   function flags() {
     var f = "";
@@ -31,12 +31,12 @@ document.addEventListener("DOMContentLoaded", function () {
   function unavailable() {
     killWorker();
     say(UNAVAILABLE, false);
-    out.textContent = "Worker unavailable — test not run.";
+    out.textContent = "Worker tidak tersedia — pengujian tidak dijalankan.";
     count.textContent = "0";
   }
   function render(matches, total, capped, text, isGlobal) {
     var html = "", last = 0;
-    if (!matches.length) { out.textContent = text || "(no text)"; count.textContent = "0"; return; }
+    if (!matches.length) { out.textContent = text || "(tidak ada teks)"; count.textContent = "0"; return; }
     if (!isGlobal) {
       var s = matches[0];
       html = esc(text.slice(0, s.i)) + '<mark class="hl">' + esc(s.s) + "</mark>" + esc(text.slice(s.i + s.len));
@@ -47,14 +47,14 @@ document.addEventListener("DOMContentLoaded", function () {
       });
       html += esc(text.slice(last));
     }
-    out.innerHTML = html || "(no text)";
-    count.textContent = capped ? MAX_MATCH + "+ (capped)" : String(total);
+    out.innerHTML = html || "(tidak ada teks)";
+    count.textContent = capped ? MAX_MATCH + "+ (dibatasi)" : String(total);
   }
   function run() {
     var pat = re.value, t = txt.value;
-    if (pat.length > MAX_PAT) { killWorker(); say("Pattern too long (max " + MAX_PAT + " chars) to keep the browser safe.", false); return; }
-    if (t.length > MAX_TXT) { killWorker(); say("Test text too long (max 50,000 chars) to keep the browser responsive.", false); return; }
-    try { new RegExp(pat, flags()); } catch (e) { killWorker(); say("Invalid regex: " + e.message, false); out.textContent = "Fix the pattern to see matches."; count.textContent = "0"; return; }
+    if (pat.length > MAX_PAT) { killWorker(); say("Pola terlalu panjang (maks " + MAX_PAT + " karakter) agar browser tetap aman.", false); return; }
+    if (t.length > MAX_TXT) { killWorker(); say("Teks uji terlalu panjang (maks 50,000 karakter) agar browser tetap responsif.", false); return; }
+    try { new RegExp(pat, flags()); } catch (e) { killWorker(); say("Regex tidak valid: " + e.message, false); out.textContent = "Perbaiki pola untuk melihat kecocokan."; count.textContent = "0"; return; }
     clearMsg();
     var canWorker = false;
     try { canWorker = typeof Worker !== "undefined"; } catch (e) { canWorker = false; }
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
     } catch (e) { unavailable(); return; }
     timer = setTimeout(function () {
       if (seq !== id) return;
-      killWorker("Pattern timed out after " + BUDGET_MS + "ms and was stopped to protect the UI. Simplify nested quantifiers like (a+)+.");
+      killWorker("Pola kehabisan waktu setelah " + BUDGET_MS + "ms dan dihentikan untuk melindungi UI. Sederhanakan kuantifier bersarang seperti (a+)+.");
       count.textContent = "0";
     }, BUDGET_MS);
     worker.onmessage = function (ev) {
@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
       var d = ev.data || {};
       var w = worker; worker = null;
       try { if (w) w.terminate(); } catch (e) {}
-      if (!d.ok) { say("Invalid regex: " + (d.error || "unknown"), false); return; }
+      if (!d.ok) { say("Regex tidak valid: " + (d.error || "tidak diketahui"), false); return; }
       render(d.matches || [], d.count || 0, !!d.capped, t, d.global !== false);
     };
     worker.onerror = function () {

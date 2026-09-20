@@ -17,27 +17,27 @@ document.addEventListener("DOMContentLoaded",function(){
   drop.addEventListener("drop",function(e){if(e.dataTransfer.files[0])load(e.dataTransfer.files[0]);});
   file.addEventListener("change",function(){if(file.files[0])load(file.files[0]);});
   function load(f){
-    if(!/^image\/(jpeg|png|webp)$/.test(f.type)){say("Please choose a JPG, PNG or WebP image.",false);return;}
-    if(f.size>MAX_FILE){say("File too large (max 20 MB). Please choose a smaller image.",false);return;}
+    if(!/^image\/(jpeg|png|webp)$/.test(f.type)){say("Silakan pilih gambar JPG, PNG atau WebP.",false);return;}
+    if(f.size>MAX_FILE){say("Berkas terlalu besar (maks 20 MB). Silakan pilih gambar yang lebih kecil.",false);return;}
     fileName=f.name.replace(/\.\w+$/,"")+"-compressed";
     origSize=f.size;var url=URL.createObjectURL(f),im=new Image();
     im.onload=function(){
       URL.revokeObjectURL(url);
-      if(im.naturalWidth*im.naturalHeight>MAX_PIXELS){say("Image is too large (over 50 megapixels). Please use a smaller image.",false);return;}
-      img=im;go.disabled=false;say("Image loaded ("+fmtSize(origSize)+"). Adjust quality and compress.",true);
+      if(im.naturalWidth*im.naturalHeight>MAX_PIXELS){say("Gambar terlalu besar (lebih dari 50 megapiksel). Silakan gunakan gambar yang lebih kecil.",false);return;}
+      img=im;go.disabled=false;say("Gambar dimuat ("+fmtSize(origSize)+"). Sesuaikan kualitas lalu kompres.",true);
     };
-    im.onerror=function(){URL.revokeObjectURL(url);say("Could not read that image. It may be corrupt or unsupported.",false);};
+    im.onerror=function(){URL.revokeObjectURL(url);say("Gagal membaca gambar tersebut. Mungkin rusak atau tidak didukung.",false);};
     im.src=url;
   }
   go.addEventListener("click",function(){
-    if(!img){say("Upload an image first.",false);return;}
+    if(!img){say("Unggah gambar terlebih dahulu.",false);return;}
     var type=fmt.value;
     var c=document.createElement("canvas");c.width=img.naturalWidth;c.height=img.naturalHeight;
     var ctx=c.getContext("2d");if(type==="image/jpeg"){ctx.fillStyle="#fff";ctx.fillRect(0,0,c.width,c.height);}
     ctx.drawImage(img,0,0);
     var quality=parseInt(q.value,10)/100;
     c.toBlob(function(blob){
-      if(!blob){say("This browser cannot export "+type+". Try JPG.",false);return;}
+      if(!blob){say("Browser ini tidak dapat mengekspor "+type+". Coba JPG.",false);return;}
       outBlob=blob;
       if(prevUrl)URL.revokeObjectURL(prevUrl);
       prevUrl=URL.createObjectURL(blob);
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded",function(){
       document.getElementById("sAfter").textContent=fmtSize(blob.size);
       var pct=origSize?Math.round((1-blob.size/origSize)*100):0;
       document.getElementById("sSaved").textContent=pct+"%";
-      dl.disabled=false;say("Compressed: "+fmtSize(origSize)+" → "+fmtSize(blob.size)+" ("+pct+"% smaller).",true);
+      dl.disabled=false;say("Terkompresi: "+fmtSize(origSize)+" → "+fmtSize(blob.size)+" ("+pct+"% lebih kecil).",true);
     },type,type==="image/png"?undefined:quality);
   });
   dl.addEventListener("click",function(){
