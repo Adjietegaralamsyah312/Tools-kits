@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JWT Decoder Online - Decode Header & Payload Free | Tools Kits</title>
+<meta name="description" content="Decode JWT header and payload online for free. Client-side only, no upload, no login. Decoding is not signature verification.">
+<link rel="canonical" href="https://adjietegaralamsyah312.github.io/Tools-kits/tools/jwt-decoder/">
+<meta property="og:type" content="website"><meta property="og:title" content="JWT Decoder | Tools Kits"><meta property="og:url" content="https://adjietegaralamsyah312.github.io/Tools-kits/tools/jwt-decoder/">
+<meta property="og:description" content="Decode JWT header and payload in your browser. No upload."><meta property="og:image" content="https://adjietegaralamsyah312.github.io/Tools-kits/assets/og-image.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="JWT Decoder | Tools Kits"><meta name="twitter:description" content="Decode JWT header and payload in your browser. No upload."><meta name="twitter:image" content="https://adjietegaralamsyah312.github.io/Tools-kits/assets/og-image.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png"><link rel="manifest" href="../../manifest.webmanifest"><meta name="theme-color" content="#2563eb"><meta property="og:site_name" content="Tools Kits"><meta property="og:locale" content="en_US"><link rel="stylesheet" href="../../assets/css/style.css"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"JWT Decoder","url":"https://adjietegaralamsyah312.github.io/Tools-kits/tools/jwt-decoder/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0"},"description":"Decode JWT header and payload online for free. Client-side only, no upload, no login."}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is my token uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. Decoding runs locally in your browser and the token is never stored or sent anywhere."}},{"@type":"Question","name":"Does decoding verify the signature?","acceptedAnswer":{"@type":"Answer","text":"No. Decoding only reads the token. Verify signatures server-side with the secret or public key."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://adjietegaralamsyah312.github.io/Tools-kits/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://adjietegaralamsyah312.github.io/Tools-kits/tools/"},{"@type":"ListItem","position":3,"name":"JWT Decoder","item":"https://adjietegaralamsyah312.github.io/Tools-kits/tools/jwt-decoder/"}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><nav class="nav" aria-label="Main navigation">
+<a class="brand" href="../../"><span class="brand-mark" aria-hidden="true">T</span> Tools Kits</a>
+<button class="icon-btn menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">☰</button>
+<div class="nav-links" id="navLinks"><a href="../../">Home</a><a href="../">Tools</a><a href="../../blog/">Blog</a><a href="../../about.html">About</a><a href="../../faq.html">FAQ</a><button class="icon-btn" id="themeBtn" aria-label="Switch to dark mode">◐</button></div>
+</nav></header>
+<main id="main" class="container">
+<p class="breadcrumb"><a href="../../">Home</a> / <a href="../">Tools</a> / JWT Decoder</p>
+<h1>JWT Decoder</h1>
+<p style="color:var(--muted)">Decode a JWT to read its header and payload. 100% client-side — nothing is uploaded or stored.</p>
+<div class="alert info" role="note">⚠️ Decoding is <strong>not verification</strong>. Anyone can read a JWT payload. Always verify the signature server-side with the secret or public key.</div>
+<div class="tool-layout"><div>
+<div class="panel">
+<label class="lbl" for="jwtIn">JWT (header.payload.signature)</label><textarea class="ta short" id="jwtIn" placeholder="eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0In0.signature" spellcheck="false"></textarea>
+<div class="row"><button class="btn primary" id="bGo">Decode</button><button class="btn" id="bCopyH">Copy header</button><button class="btn" id="bCopyP">Copy payload</button><button class="btn ghost" id="bClear">Clear</button></div>
+<div class="alert" id="msg" hidden role="status"></div>
+<label class="lbl" for="outH">Header</label><div class="output" id="outH" tabindex="0" aria-live="polite">Header will appear here.</div>
+<label class="lbl" for="outP">Payload</label><div class="output" id="outP" tabindex="0" aria-live="polite">Payload will appear here.</div>
+<label class="lbl" for="sigInfo">Signature / token info</label><div class="output" id="sigInfo" tabindex="0" aria-live="polite">Signature info will appear here.</div>
+</div>
+<article class="prose"><h2>How to use</h2><ol><li>Paste a JWT (<code>header.payload.signature</code>).</li><li>Click Decode.</li><li>Read the header and payload; check the signature note.</li></ol>
+<div class="faq"><h2>FAQ</h2><details><summary>Is my token uploaded?</summary><p>No. Decoding runs locally in your browser and the token is never stored or sent anywhere.</p></details><details><summary>Does decoding verify the signature?</summary><p>No. Decoding only reads the token. Verify signatures server-side with the secret or public key.</p></details></div>
+<h2>Related tools</h2><div class="related" id="relatedTools" data-tool="jwt-decoder"></div></article>
+</div><aside class="sidebar"><div class="ad-slot" data-slot="sidebar" aria-hidden="true">AdSlot · sidebar</div></aside></div>
+</main>
+<footer class="site"><div class="foot-bottom">© <span data-year>2026</span> Tools Kits</div></footer>
+<script src="../../assets/js/tools-data.js" defer></script><script src="../../assets/js/main.js" defer></script>
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+  var inp=document.getElementById("jwtIn"),outH=document.getElementById("outH"),outP=document.getElementById("outP"),sig=document.getElementById("sigInfo"),m=document.getElementById("msg");
+  var MAX_LEN=20000;
+  function say(t,ok){m.hidden=false;m.textContent=t;m.className="alert "+(ok?"success":"error");}
+  function b64url(s){s=s.replace(/-/g,"+").replace(/_/g,"/");while(s.length%4)s+="=";var bin=atob(s),bytes=new Uint8Array(bin.length);for(var k=0;k<bin.length;k++)bytes[k]=bin.charCodeAt(k);return new TextDecoder().decode(bytes);}
+  function reset(){outH.textContent="Header will appear here.";outP.textContent="Payload will appear here.";sig.textContent="Signature info will appear here.";}
+  document.getElementById("bGo").addEventListener("click",function(){
+    var v=inp.value.trim();if(!v){say("Please paste a JWT first.",false);return;}
+    if(v.length>MAX_LEN){say("Token too long (max "+MAX_LEN+" chars).",false);return;}
+    var parts=v.split(".");
+    if(parts.length!==3||!parts[0]||!parts[1]){reset();say("Invalid JWT. Expected three Base64URL parts: header.payload.signature.",false);return;}
+    var h,p;
+    try{h=JSON.parse(b64url(parts[0]));}catch(e){reset();say("Invalid JWT header: not valid Base64URL JSON.",false);return;}
+    try{p=JSON.parse(b64url(parts[1]));}catch(e){reset();say("Invalid JWT payload: not valid Base64URL JSON.",false);return;}
+    outH.textContent=JSON.stringify(h,null,2);
+    outP.textContent=JSON.stringify(p,null,2);
+    var alg=(h&&h.alg)?String(h.alg):"unknown";
+    if(!parts[2]){sig.textContent="Algorithm: "+alg+"\nSignature: EMPTY (unsigned token). Decoding only — never trust an unsigned token.";}
+    else{sig.textContent="Algorithm: "+alg+"\nSignature: present ("+parts[2].length+" chars, Base64URL). Decoding only — signature NOT verified.";}
+    say("Decoded successfully. Remember: decoding is not verification.",true);
+  });
+  document.getElementById("bCopyH").addEventListener("click",function(){window.tkCopy(outH.textContent,m);});
+  document.getElementById("bCopyP").addEventListener("click",function(){window.tkCopy(outP.textContent,m);});
+  document.getElementById("bClear").addEventListener("click",function(){inp.value="";reset();m.hidden=true;inp.focus();});
+});
+</script>
+</body></html>

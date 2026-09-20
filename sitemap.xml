@@ -12,7 +12,6 @@
 <url><loc>https://adjietegaralamsyah312.github.io/Tools-kits/tools/regex-tester/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://adjietegaralamsyah312.github.io/Tools-kits/tools/word-counter/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://adjietegaralamsyah312.github.io/Tools-kits/tools/case-converter/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-<url><loc>https://adjietegaralamsyah312.github.io/Tools-kits/tools/lorem-ipsum/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://adjietegaralamsyah312.github.io/Tools-kits/tools/image-compressor/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://adjietegaralamsyah312.github.io/Tools-kits/tools/image-resizer/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://adjietegaralamsyah312.github.io/Tools-kits/tools/image-converter/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
@@ -20,6 +19,9 @@
 <url><loc>https://adjietegaralamsyah312.github.io/Tools-kits/tools/timestamp-converter/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://adjietegaralamsyah312.github.io/Tools-kits/tools/color-picker/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://adjietegaralamsyah312.github.io/Tools-kits/tools/unit-converter/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://adjietegaralamsyah312.github.io/Tools-kits/tools/jwt-decoder/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://adjietegaralamsyah312.github.io/Tools-kits/tools/diff-checker/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://adjietegaralamsyah312.github.io/Tools-kits/tools/cron-generator/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://adjietegaralamsyah312.github.io/Tools-kits/blog/</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
 <url><loc>https://adjietegaralamsyah312.github.io/Tools-kits/about.html</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
 <url><loc>https://adjietegaralamsyah312.github.io/Tools-kits/contact.html</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>

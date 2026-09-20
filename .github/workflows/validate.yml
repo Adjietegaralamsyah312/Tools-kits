@@ -73,7 +73,8 @@ jobs:
           dirs = sorted(p.name for p in (root/"tools").iterdir() if p.is_dir())
           print(f"registry={len(slugs)} dirs={len(dirs)}")
           if slugs != dirs: fail(f"registry vs dirs mismatch: {slugs} vs {dirs}")
-          if len(slugs) != 18: fail(f"tool count != 18: {len(slugs)}")
+          if len(slugs) != 20: fail(f"tool count != 20: {len(slugs)}")
+          if (root/"tools"/"lorem-ipsum").exists(): fail("tools/lorem-ipsum must be deleted (replaced by jwt-decoder)")
           sm = " ".join(locs)
           for s in slugs:
             if f"/tools/{s}/" not in sm: fail(f"sitemap missing tool {s}")

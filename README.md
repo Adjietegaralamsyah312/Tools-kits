@@ -18,7 +18,7 @@ Production URL: `https://adjietegaralamsyah312.github.io/Tools-kits/`
 ```
 index.html, about/contact/privacy/terms/faq.html, 404.html
 tools/index.html
-tools/<slug>/index.html   (18 tools, see list below)
+tools/<slug>/index.html   (20 tools, see list below)
 blog/index.html
 assets/css/style.css
 assets/js/tools-data.js   (REGISTRY — tambah tool baru di sini)
@@ -34,13 +34,13 @@ sitemap.xml, robots.txt, favicon.svg, manifest.webmanifest, _headers
 README.md
 ```
 
-## 18 tools
+## 20 tools
 
 Developer: json-formatter, json-validator, json-minifier, base64, url-encoder,
-hash-generator, uuid-generator, regex-tester.
-Text: word-counter, case-converter, lorem-ipsum.
+hash-generator, uuid-generator, regex-tester, jwt-decoder, diff-checker.
+Text: word-counter, case-converter.
 Image: image-compressor, image-resizer, image-converter.
-Utility: qr-generator, timestamp-converter, color-picker, unit-converter.
+Utility: qr-generator, timestamp-converter, color-picker, unit-converter, cron-generator.
 
 ## Cara menjalankan lokal
 
@@ -91,7 +91,7 @@ atau serve langsung dari dalam folder `Tools-kits/` lalu buka `http://localhost:
 
 - Title/description/canonical/OG/Twitter unik per halaman; semantic headings; breadcrumb.
   Wajib ada: og:site_name, og:locale, theme-color, apple-touch-icon, manifest (bila relevan).
-- `sitemap.xml` (26 URL), `robots.txt`, `manifest.webmanifest`, `favicon.svg`, `og-image.png`.
+- `sitemap.xml` (28 URL), `robots.txt`, `manifest.webmanifest`, `favicon.svg`, `og-image.png`.
 - Schema.org: `WebSite` (home, tanpa SearchAction), `WebApplication` unik per tool,
   `FAQPage` (JSON Formatter, FAQ — parity dengan FAQ terlihat), `ItemList` (katalog /tools/),
   `BreadcrumbList` (tools + tool pages).
