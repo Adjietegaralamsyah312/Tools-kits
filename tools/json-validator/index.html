@@ -39,10 +39,11 @@
 <script>
 document.addEventListener("DOMContentLoaded",function(){
   var i=document.getElementById("in"),o=document.getElementById("out"),m=document.getElementById("msg");
+  var MAX_LEN=2000000;
   function say(t,ok){m.hidden=false;m.textContent=t;m.className="alert "+(ok?"success":"error");}
-  function validate(silent){var v=i.value.trim();if(!v){say("Please paste some JSON first.",false);return;}try{var r=JSON.parse(v);var info=Array.isArray(r)?r.length+" items":(r!==null&&typeof r==="object"?Object.keys(r).length+" top-level keys":"valid "+(r===null?"null":typeof r)+" value");o.textContent="Valid JSON ✓ ("+info+")";say("Valid JSON.",true);}catch(e){var pos=(/position\s+(\d+)/i.exec(e.message)||[])[1];var line="";if(pos!==undefined){line=" near line "+(v.slice(0,+pos).split("\n").length)+".";}o.textContent="Invalid JSON ✗";say("Invalid JSON. Please check the syntax"+line+" ("+e.message+")",false);}}
+  function validate(silent){var v=i.value.trim();if(!v){say("Please paste some JSON first.",false);return;}if(v.length>MAX_LEN){say("Input too long (max "+MAX_LEN+" chars) to keep the browser responsive.",false);return;}try{var r=JSON.parse(v);var info=Array.isArray(r)?r.length+" items":(r!==null&&typeof r==="object"?Object.keys(r).length+" top-level keys":"valid "+(r===null?"null":typeof r)+" value");o.textContent="Valid JSON ✓ ("+info+")";say("Valid JSON.",true);}catch(e){var pos=(/position\s+(\d+)/i.exec(e.message)||[])[1];var line="";if(pos!==undefined){line=" near line "+(v.slice(0,+pos).split("\n").length)+".";}o.textContent="Invalid JSON ✗";say("Invalid JSON. Please check the syntax"+line+" ("+e.message+")",false);}}
   document.getElementById("bV").addEventListener("click",function(){validate();});
-  document.getElementById("bF").addEventListener("click",function(){try{o.textContent=JSON.stringify(JSON.parse(i.value),null,2);say("Formatted.",true);}catch(e){say("Invalid JSON: "+e.message,false);}});
+  document.getElementById("bF").addEventListener("click",function(){if(i.value.length>MAX_LEN){say("Input too long (max "+MAX_LEN+" chars) to keep the browser responsive.",false);return;}try{o.textContent=JSON.stringify(JSON.parse(i.value),null,2);say("Formatted.",true);}catch(e){say("Invalid JSON: "+e.message,false);}});
   document.getElementById("bC").addEventListener("click",function(){i.value="";o.textContent="Validation result will appear here.";m.hidden=true;});
   document.getElementById("bCopy").addEventListener("click",function(){window.tkCopy(o.textContent,m);});
 });

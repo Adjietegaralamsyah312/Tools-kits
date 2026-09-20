@@ -68,8 +68,6 @@
       document.addEventListener("click",function(e){
         if(!isMenuOpen())return;
         if(nl.contains(e.target)||mb.contains(e.target))return;
-        var header=e.target.closest?e.target.closest("header.site"):null;
-        if(header&&header.contains(nl)&&!nl.contains(e.target)&&!mb.contains(e.target)){setMenu(false);return;}
         setMenu(false);
       });
       document.addEventListener("keydown",function(e){

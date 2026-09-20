@@ -103,6 +103,8 @@ atau serve langsung dari dalam folder `Tools-kits/` lalu buka `http://localhost:
 ```bash
 python3 -m http.server 8000
 # cek tiap /tools/<slug>/ tidak 404, tidak ada console error
+# smoke test tool baru: jwt-decoder (decode sample), diff-checker (compare),
+# cron-generator (preset + validasi)
 ```
 
 CI ringan (`.github/workflows/validate.yml`, tanpa build): parse HTML, larangan

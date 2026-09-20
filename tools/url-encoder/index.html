@@ -40,9 +40,11 @@
 <script>
 document.addEventListener("DOMContentLoaded",function(){
   var i=document.getElementById("in"),o=document.getElementById("out"),m=document.getElementById("msg"),mode=document.getElementById("mode");
+  var MAX_LEN=2000000;
+  function tooLong(s){return s.length>MAX_LEN;}
   function say(t,ok){m.hidden=false;m.textContent=t;m.className="alert "+(ok?"success":"error");}
-  document.getElementById("bE").addEventListener("click",function(){if(!i.value){say("Please enter text first.",false);return;}try{o.textContent=mode.value==="full"?encodeURI(i.value):encodeURIComponent(i.value);say("Encoded.",true);}catch(e){say("Encode failed: "+e.message,false);}});
-  document.getElementById("bD").addEventListener("click",function(){if(!i.value.trim()){say("Please enter text first.",false);return;}try{o.textContent=decodeURIComponent(i.value);say("Decoded.",true);}catch(e){try{o.textContent=decodeURI(i.value);say("Decoded.",true);}catch(e2){say("Invalid encoded URL. Check % sequences.",false);}}});
+  document.getElementById("bE").addEventListener("click",function(){if(!i.value){say("Please enter text first.",false);return;}if(tooLong(i.value)){say("Input too long (max "+MAX_LEN+" chars) to keep the browser responsive.",false);return;}try{o.textContent=mode.value==="full"?encodeURI(i.value):encodeURIComponent(i.value);say("Encoded.",true);}catch(e){say("Encode failed: "+e.message,false);}});
+  document.getElementById("bD").addEventListener("click",function(){if(!i.value.trim()){say("Please enter text first.",false);return;}if(tooLong(i.value)){say("Input too long (max "+MAX_LEN+" chars) to keep the browser responsive.",false);return;}try{o.textContent=decodeURIComponent(i.value);say("Decoded.",true);}catch(e){try{o.textContent=decodeURI(i.value);say("Decoded.",true);}catch(e2){say("Invalid encoded URL. Check % sequences.",false);}}});
   document.getElementById("bCopy").addEventListener("click",function(){window.tkCopy(o.textContent,m);});
   document.getElementById("bClear").addEventListener("click",function(){i.value="";o.textContent="Result will appear here.";m.hidden=true;});
 });
