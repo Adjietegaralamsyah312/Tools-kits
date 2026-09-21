@@ -161,9 +161,17 @@
         if (!p) return;
         if (card.dataset.tkD0 === undefined) card.dataset.tkD0 = p.textContent;
         p.textContent = lang === "en" ? DATA[slug][1] : card.dataset.tkD0;
+        var pills = card.querySelectorAll(".pill");
+        var catPill = pills.length > 1 ? pills[1] : null;
+        var cat = card.getAttribute("data-cat") || "";
+        if (catPill && cat && FILTER[cat]) {
+          if (card.dataset.tkC0 === undefined) card.dataset.tkC0 = catPill.textContent;
+          catPill.textContent = lang === "en" ? FILTER[cat][1] : FILTER[cat][0];
+          if (lang === "id" && card.dataset.tkC0) catPill.textContent = card.dataset.tkC0;
+        }
         var ds = card.getAttribute("data-search") || "";
         if (card.dataset.tkS0 === undefined) card.dataset.tkS0 = ds;
-        card.setAttribute("data-search", lang === "en" ? (slug + " " + DATA[slug][1] + " " + slug).toLowerCase() : card.dataset.tkS0);
+        card.setAttribute("data-search", lang === "en" ? (slug + " " + DATA[slug][1] + " " + slug + " " + (cat && FILTER[cat] ? FILTER[cat][1] : "")).toLowerCase() : card.dataset.tkS0);
       })(cards[i]);
     }
     var tc = document.getElementById("toolCount");

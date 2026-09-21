@@ -213,5 +213,6 @@ window.TK_I18N_FILTER = Object.assign(window.TK_I18N_FILTER || {}, {
 "developer": ["Developer", "Developer"],
 "text": ["Teks", "Text"],
 "image": ["Gambar", "Image"],
-"utility": ["Utilitas", "Utility"]
+"utility": ["Utilitas", "Utility"],
+"security": ["Keamanan", "Security"]
 });

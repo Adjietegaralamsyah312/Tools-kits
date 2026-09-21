@@ -22,11 +22,12 @@ window.TOOLS = [
   {slug:"cron-generator",name:"Cron Expression Generator",category:"utility",description:"Susun dan validasi ekspresi cron standar 5 kolom.",icon:"◷"}
 ];
 window.TOOL_CATEGORIES = [
-  {id:"all",name:"All"},
-  {id:"developer",name:"Developer"},
-  {id:"text",name:"Text"},
-  {id:"image",name:"Image"},
-  {id:"utility",name:"Utility"}
+  {id:"all",name:"All",name_id:"Semua"},
+  {id:"developer",name:"Developer",name_id:"Developer"},
+  {id:"text",name:"Text",name_id:"Teks"},
+  {id:"image",name:"Image",name_id:"Gambar"},
+  {id:"utility",name:"Utility",name_id:"Utilitas"},
+  {id:"security",name:"Security",name_id:"Keamanan"}
 ];
 window.RELATED = {
   "json-formatter":["json-validator","json-minifier","base64","regex-tester"],

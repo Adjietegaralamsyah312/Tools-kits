@@ -93,13 +93,21 @@
     renderToolCards();
   });
 
+  function catName(id){
+    try{
+      var list=window.TOOL_CATEGORIES||[];
+      for(var k=0;k<list.length;k++)if(list[k].id===id)return (__L()==="en"?list[k].name:(list[k].name_id||list[k].name));
+    }catch(e){}
+    return id;
+  }
   function renderToolCards(){
     var grid=document.getElementById("toolsGrid");
     if(!grid||!window.TOOLS)return;
     var base=grid.getAttribute("data-base")||"";
     grid.innerHTML=window.TOOLS.map(function(t){
-      return '<article class="card" data-cat="'+esc(t.category)+'" data-search="'+esc((t.name+" "+t.description+" "+t.category).toLowerCase())+'">'+
-        '<div class="meta"><span class="pill">'+esc(t.icon)+'</span><span class="pill">'+esc(t.category)+'</span></div>'+
+      var cn=catName(t.category);
+      return '<article class="card" data-cat="'+esc(t.category)+'" data-search="'+esc((t.name+" "+t.description+" "+t.category+" "+cn).toLowerCase())+'">'+
+        '<div class="meta"><span class="pill">'+esc(t.icon)+'</span><span class="pill">'+esc(cn)+'</span></div>'+
         '<h3><a href="'+esc(base)+esc(t.slug)+'/">'+esc(t.name)+'</a></h3><p>'+esc(t.description)+'</p></article>';
     }).join("");
     var count=document.getElementById("toolCount");

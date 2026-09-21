@@ -1,6 +1,6 @@
 :root{
-  --bg:#ffffff; --bg-soft:#f6f7f9; --card:#ffffff; --border:#e5e7eb;
-  --text:#111827; --muted:#6b7280; --primary:#2563eb; --primary-hover:#1d4ed8;
+  --bg:#f6f8fc; --bg-soft:#eef2f7; --card:#ffffff; --border:#e2e8f0;
+  --text:#111827; --muted:#64748b; --primary:#2563eb; --primary-hover:#1d4ed8;
   --primary-soft:#eff6ff; --success:#059669; --error:#dc2626; --warning:#d97706;
   --radius:12px; --radius-sm:8px; --shadow:0 1px 2px rgba(16,24,40,.06),0 1px 3px rgba(16,24,40,.08);
   --max:1120px; --font:ui-sans-serif,-apple-system,"Segoe UI",Roboto,Inter,Arial,sans-serif;
@@ -109,3 +109,6 @@ input[type="range"]{width:100%}
 [data-theme="dark"] .btn.primary:hover{background:#1d4ed8}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 @media(max-width:720px){.nav-links{display:none}.nav-links.open{display:flex;position:absolute;top:100%;left:0;right:0;z-index:30;background:var(--bg);flex-direction:column;align-items:flex-start;gap:.25rem;max-width:100%;padding:.6rem .75rem 1rem;border-bottom:2px solid var(--border);box-shadow:var(--shadow)}.nav-links.open a{display:block;width:100%;padding:.7rem .8rem}.nav-links.open .icon-btn{align-self:flex-start;flex:0 0 auto;width:auto}.menu-btn{display:inline-flex;margin-left:auto;width:44px;height:44px;min-width:44px;min-height:44px;padding:0;align-items:center;justify-content:center;flex:0 0 44px;line-height:1}}
+/* Light Mode polish (scoped: Dark Mode untouched) */
+html[data-theme="light"] textarea.ta,html[data-theme="light"] input.in,html[data-theme="light"] select.sel,html[data-theme="light"] .drop{background:#fff}
+.btn:not(.primary):not(:disabled):hover,.icon-btn:hover{border-color:var(--primary)}
