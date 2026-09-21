@@ -1,0 +1,5 @@
+# Cloudflare only (ignored by GitHub Pages).
+# Mirror compat: absolute /Tools-kits/* paths (404.html, sitemap, canonical)
+# keep working on workers.dev which serves from domain root.
+# Rewrite (200, no redirect loop: target never matches the source prefix).
+/Tools-kits/* /:splat 200

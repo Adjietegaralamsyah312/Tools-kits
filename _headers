@@ -1,17 +1,13 @@
+# NOTE (GitHub Pages): this _headers file is IGNORED by GitHub Pages.
+# It only takes effect on Cloudflare Pages/Workers. Do NOT claim the
+# headers below are active on https://adjietegaralamsyah312.github.io/Tools-kits/.
+# No meta-CSP is inlined in HTML to avoid accidentally blocking site functionality.
+# Cloudflare Pages headers – security hardening (no backend needed).
+# NOTE: Cloudflare _headers supports "#" comments only. Do NOT wrap this
+# file in /* */ block comments – the deploy API rejects them (code 100324).
 /*
-  NOTE (GitHub Pages): this _headers file is IGNORED by GitHub Pages.
-  It only takes effect on Cloudflare Pages/Workers. Do NOT claim the
-  headers below are active on https://adjietegaralamsyah312.github.io/Tools-kits/.
-  Kept for a possible future Cloudflare deployment. No meta-CSP is inlined
-  in HTML to avoid accidentally blocking site functionality (e.g. QR CDN).
-*/
-/*
-  Cloudflare Pages headers – security hardening (no backend needed).
-*/
-/*
-  Content-Security-Policy: default-src 'self'; img-src 'self' data: blob:; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'
+  Content-Security-Policy: default-src 'self'; img-src 'self' data: blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
-*/
